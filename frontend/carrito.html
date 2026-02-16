@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Autoparts Store</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- BARRA DE NAVEGACIÓN -->
+    <header class="header_navegacion">
+        <div class="contenedor_logo">
+            <span class="logo_texto">AUTOPARTS STORE</span>
+        </div>
+
+        <nav class="menu_navegacion">
+            <ul class="lista_menu">
+                <li class="item_menu"><a href="index.html" class="enlace_menu">INICIO</a></li>
+                <li class="item_menu"><a href="catalogo.html" class="enlace_menu">CATÁLOGO</a></li>
+                <li class="item_menu"><a href="index.html#ofertas" class="enlace_menu">OFERTAS</a></li>
+                <li class="item_menu"><a href="contacto.html" class="enlace_menu">CONTACTO</a></li>
+                <li class="item_menu"><a href="inicio_sesion.html" class="enlace_menu" id="enlace_sesion">INICIAR SESIÓN</a></li>
+            </ul>
+        </nav>
+
+        <div class="contenedor_carrito">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='21' r='1'%3E%3C/circle%3E%3Ccircle cx='20' cy='21' r='1'%3E%3C/circle%3E%3Cpath d='M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6'%3E%3C/path%3E%3C/svg%3E" alt="Carrito" class="icono_carrito">
+            <span class="contador_carrito">0</span>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="contenedor_formulario">
+        <h1 class="titulo_formulario">CARRITO DE COMPRAS</h1>
+        
+        <div id="contenedor_carrito">
+            <!-- Se carga dinámicamente con JavaScript -->
+        </div>
+
+        <div id="resumen_carrito" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #404040;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 20px; color: #e0e0e0;">
+                <span>Total:</span>
+                <span id="total_carrito" style="color: #ff4444; font-size: 1.5rem; font-weight: bold;">$0.00</span>
+            </div>
+            <button class="boton_formulario" onclick="realizar_compra()">REALIZAR COMPRA</button>
+            <button class="boton_formulario" onclick="vaciar_carrito()" style="background-color: #404040;">VACIAR CARRITO</button>
+        </div>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="footer_pagina">
+        <div class="contenedor_footer">
+            <div class="columna_footer">
+                <h3 class="titulo_footer">AUTOPARTS STORE</h3>
+                <p class="texto_footer">Tu tienda de confianza para autopartes originales y de alta calidad. Envíos a todo el país.</p>
+            </div>
+
+            <div class="columna_footer">
+                <h3 class="titulo_footer">ENLACES RÁPIDOS</h3>
+                <ul class="lista_footer">
+                    <li><a href="index.html" class="enlace_footer">Inicio</a></li>
+                    <li><a href="catalogo.html" class="enlace_footer">Catálogo</a></li>
+                    <li><a href="contacto.html" class="enlace_footer">Contacto</a></li>
+                    <li><a href="terminos.html" class="enlace_footer">Términos</a></li>
+                </ul>
+            </div>
+
+            <div class="columna_footer">
+                <h3 class="titulo_footer">CONTACTO</h3>
+                <ul class="lista_footer">
+                    <li><span class="icono_footer">📍</span> Av. Principal #123, Ciudad</li>
+                    <li><span class="icono_footer">📞</span> (555) 123-4567</li>
+                    <li><span class="icono_footer">✉️</span> info@autopartsstore.com</li>
+                </ul>
+            </div>
+
+            <div class="columna_footer">
+                <h3 class="titulo_footer">SÍGUENOS</h3>
+                <div class="contenedor_social">
+                    <a href="#" class="icono_social">f</a>
+                    <a href="#" class="icono_social">ig</a>
+                    <a href="#" class="icono_social">yt</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="contenedor_copyright">
+            <p class="texto_copyright">&copy; 2024 Autoparts Store. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        function actualizar_enlace_sesion()
+        {
+            const usuario = sessionStorage.getItem('usuario');
+
+            if (usuario)
+            {
+                const datos_usuario = JSON.parse(usuario);
+                const enlace_sesion = document.getElementById('enlace_sesion');
+
+                enlace_sesion.textContent = 'MI PERFIL';
+                enlace_sesion.href = 'perfil.html';
+            }
+        }
+
+        function mostrar_carrito()
+        {
+            const carrito = JSON.parse(localStorage.getItem('carrito_temporal')) || [];
+            const productos = JSON.parse(localStorage.getItem('productos')) || [];
+            const contenedor = document.getElementById('contenedor_carrito');
+            let total = 0;
+
+            if (carrito.length === 0)
+            {
+                contenedor.innerHTML = '<p style="text-align: center; color: #b0b0b0;">Tu carrito está vacío</p>';
+                document.getElementById('total_carrito').textContent = '$0.00';
+                return;
+            }
+
+            let html = '';
+
+            carrito.forEach(id_producto =>
+            {
+                const producto = productos.find(p => p.id == id_producto);
+
+                if (producto)
+                {
+                    total += producto.precio;
+
+                    html += `
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px; padding: 15px; background-color: #1a1a1a; border-radius: 8px;">
+                            <img src="${producto.imagen}" alt="${producto.nombre}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 5px;">
+                            <div style="flex: 1;">
+                                <h3 style="color: #ff4444; margin-bottom: 5px;">${producto.nombre}</h3>
+                                <p style="color: #b0b0b0;">${producto.descripcion}</p>
+                                <span style="color: #ff4444; font-weight: bold;">$${producto.precio.toFixed(2)}</span>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            contenedor.innerHTML = html;
+            document.getElementById('total_carrito').textContent = `$${total.toFixed(2)}`;
+        }
+
+        function realizar_compra()
+        {
+            const usuario = sessionStorage.getItem('usuario');
+
+            if (!usuario)
+            {
+                alert('Debes iniciar sesión para realizar la compra');
+                window.location.href = 'inicio_sesion.html';
+                return;
+            }
+
+            const carrito = JSON.parse(localStorage.getItem('carrito_temporal')) || [];
+
+            if (carrito.length === 0)
+            {
+                alert('Tu carrito está vacío');
+                return;
+            }
+
+            // Aquí se procesaría la compra
+            alert('Compra realizada con éxito');
+            localStorage.removeItem('carrito_temporal');
+            window.location.href = 'catalogo.html';
+        }
+
+        function vaciar_carrito()
+        {
+            if (confirm('¿Estás seguro de vaciar el carrito?'))
+            {
+                localStorage.removeItem('carrito_temporal');
+                mostrar_carrito();
+                actualizar_contador_carrito();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () =>
+        {
+            actualizar_enlace_sesion();
+            mostrar_carrito();
+        });
+    </script>
+</body>
+</html>

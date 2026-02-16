@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "nombre": "JUEGO PASTILLAS FRENO",
+    "descripcion": "Para Honda Civic 2016-2021",
+    "categoria": "frenos",
+    "precio": 45.99,
+    "precio_anterior": 65.99,
+    "imagen": "https://images.unsplash.com/photo-1598550472769-52b27a6d9f6d?w=300",
+    "destacado": true
+  },
+  {
+    "id": 2,
+    "nombre": "FILTRO DE AIRE DEPORTIVO",
+    "descripcion": "Universal - Alto flujo",
+    "categoria": "motor",
+    "precio": 32.50,
+    "precio_anterior": 0,
+    "imagen": "https://images.unsplash.com/photo-1598550472769-52b27a6d9f6d?w=300",
+    "destacado": true
+  },
+  {
+    "id": 3,
+    "nombre": "AMORTIGUADOR TRASERO",
+    "descripcion": "Para Toyota Corolla 2010-2015",
+    "categoria": "suspension",
+    "precio": 78.25,
+    "precio_anterior": 0,
+    "imagen": "https://images.unsplash.com/photo-1598550472769-52b27a6d9f6d?w=300",
+    "destacado": true
+  },
+  {
+    "id": 4,
+    "nombre": "BOMBA DE AGUA",
+    "descripcion": "Nissan Sentra 2013-2018",
+    "categoria": "motor",
+    "precio": 55.75,
+    "precio_anterior": 0,
+    "imagen": "https://images.unsplash.com/photo-1598550472769-52b27a6d9f6d?w=300",
+    "destacado": true
+  },
+  {
+    "id": 5,
+    "nombre": "SENSOR DE OXÍGENO",
+    "descripcion": "Universal 4 hilos",
+    "categoria": "electrico",
+    "precio": 28.99,
+    "precio_anterior": 0,
+    "imagen": "https://images.unsplash.com/photo-1598550472769-52b27a6d9f6d?w=300",
+    "destacado": true
+  },
+  {
+    "id": 6,
+    "nombre": "KIT DE EMBRAGUE",
+    "descripcion": "Mitsubishi Lancer 2008-2013",
+    "categoria": "transmision",
+    "precio": 189.99,
+    "precio_anterior": 0,
+    "imagen": "https://images.unsplash.com/photo-1598550472769-52b27a6d9f6d?w=300",
+    "destacado": true
+  }
+]

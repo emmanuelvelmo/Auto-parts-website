@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Producto - Autoparts Store</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- BARRA DE NAVEGACIÓN -->
+    <header class="header_navegacion">
+        <div class="contenedor_logo">
+            <span class="logo_texto">AUTOPARTS STORE</span>
+        </div>
+
+        <nav class="menu_navegacion">
+            <ul class="lista_menu">
+                <li class="item_menu"><a href="index.html" class="enlace_menu">INICIO</a></li>
+                <li class="item_menu"><a href="catalogo.html" class="enlace_menu">CATÁLOGO</a></li>
+                <li class="item_menu"><a href="index.html#ofertas" class="enlace_menu">OFERTAS</a></li>
+                <li class="item_menu"><a href="contacto.html" class="enlace_menu">CONTACTO</a></li>
+                <li class="item_menu"><a href="inicio_sesion.html" class="enlace_menu" id="enlace_sesion">INICIAR SESIÓN</a></li>
+            </ul>
+        </nav>
+
+        <div class="contenedor_carrito">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='21' r='1'%3E%3C/circle%3E%3Ccircle cx='20' cy='21' r='1'%3E%3C/circle%3E%3Cpath d='M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6'%3E%3C/path%3E%3C/svg%3E" alt="Carrito" class="icono_carrito">
+            <span class="contador_carrito">0</span>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="contenedor_formulario" id="contenedor_producto">
+        <!-- Se carga dinámicamente con JavaScript -->
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="footer_pagina">
+        <div class="contenedor_footer">
+            <div class="columna_footer">
+                <h3 class="titulo_footer">AUTOPARTS STORE</h3>
+                <p class="texto_footer">Tu tienda de confianza para autopartes originales y de alta calidad. Envíos a todo el país.</p>
+            </div>
+
+            <div class="columna_footer">
+                <h3 class="titulo_footer">ENLACES RÁPIDOS</h3>
+                <ul class="lista_footer">
+                    <li><a href="index.html" class="enlace_footer">Inicio</a></li>
+                    <li><a href="catalogo.html" class="enlace_footer">Catálogo</a></li>
+                    <li><a href="contacto.html" class="enlace_footer">Contacto</a></li>
+                    <li><a href="terminos.html" class="enlace_footer">Términos</a></li>
+                </ul>
+            </div>
+
+            <div class="columna_footer">
+                <h3 class="titulo_footer">CONTACTO</h3>
+                <ul class="lista_footer">
+                    <li><span class="icono_footer">📍</span> Av. Principal #123, Ciudad</li>
+                    <li><span class="icono_footer">📞</span> (555) 123-4567</li>
+                    <li><span class="icono_footer">✉️</span> info@autopartsstore.com</li>
+                </ul>
+            </div>
+
+            <div class="columna_footer">
+                <h3 class="titulo_footer">SÍGUENOS</h3>
+                <div class="contenedor_social">
+                    <a href="#" class="icono_social">f</a>
+                    <a href="#" class="icono_social">ig</a>
+                    <a href="#" class="icono_social">yt</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="contenedor_copyright">
+            <p class="texto_copyright">&copy; 2024 Autoparts Store. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        function actualizar_enlace_sesion()
+        {
+            const usuario = sessionStorage.getItem('usuario');
+
+            if (usuario)
+            {
+                const datos_usuario = JSON.parse(usuario);
+                const enlace_sesion = document.getElementById('enlace_sesion');
+
+                enlace_sesion.textContent = 'MI PERFIL';
+                enlace_sesion.href = 'perfil.html';
+            }
+        }
+
+        function cargar_detalle_producto()
+        {
+            const url_params = new URLSearchParams(window.location.search);
+            const id_producto = url_params.get('id');
+            const productos = JSON.parse(localStorage.getItem('productos')) || [];
+            const producto = productos.find(p => p.id == id_producto);
+
+            if (!producto)
+            {
+                window.location.href = 'catalogo.html';
+                return;
+            }
+
+            const contenedor = document.getElementById('contenedor_producto');
+            const precio_anterior_html = producto.precio_anterior && producto.precio_anterior > 0 ?
+                `<span class="precio_anterior">$${producto.precio_anterior.toFixed(2)}</span>` : '';
+
+            contenedor.innerHTML = `
+                <img src="${producto.imagen}" alt="${producto.nombre}" style="width: 100%; max-width: 400px; height: auto; margin: 0 auto 20px; display: block; border-radius: 8px;">
+                <h1 class="titulo_formulario">${producto.nombre}</h1>
+                
+                <div style="margin-bottom: 20px;">
+                    <p style="color: #b0b0b0; line-height: 1.6;">${producto.descripcion}</p>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <strong style="color: #ff4444;">Categoría:</strong>
+                    <p style="color: #e0e0e0;">${producto.categoria}</p>
+                </div>
+
+                <div class="contenedor_precio" style="margin-bottom: 30px;">
+                    <span class="precio_actual">$${producto.precio.toFixed(2)}</span>
+                    ${precio_anterior_html}
+                </div>
+
+                <button class="boton_formulario" onclick="agregar_al_carrito(${producto.id})">AGREGAR AL CARRITO</button>
+                <button class="boton_formulario" onclick="window.location.href='catalogo.html'" style="background-color: #404040;">VOLVER AL CATÁLOGO</button>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', () =>
+        {
+            actualizar_enlace_sesion();
+            cargar_detalle_producto();
+        });
+    </script>
+</body>
+</html>
