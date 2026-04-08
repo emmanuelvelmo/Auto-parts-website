@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo - Autoparts Store</title>
+    <title>Ofertas - Autoparts Store</title>
     <link rel="stylesheet" href="css/styles.css">
     <style>
         .contenedor_busqueda {
@@ -59,6 +59,23 @@
             padding: 50px;
             font-size: 1.2rem;
         }
+
+        .badge_oferta {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff4444;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .tarjeta_producto {
+            position: relative;
+        }
     </style>
 </head>
 <body>
@@ -71,8 +88,8 @@
         <nav class="menu_navegacion">
             <ul class="lista_menu">
                 <li class="item_menu"><a href="inicio.html" class="enlace_menu">INICIO</a></li>
-                <li class="item_menu"><a href="catalogo.html" class="enlace_menu activo">CATÁLOGO</a></li>
-                <li class="item_menu"><a href="ofertas.html" class="enlace_menu">OFERTAS</a></li>
+                <li class="item_menu"><a href="catalogo.html" class="enlace_menu">CATÁLOGO</a></li>
+                <li class="item_menu"><a href="ofertas.html" class="enlace_menu activo">OFERTAS</a></li>
                 <li class="item_menu"><a href="contacto.html" class="enlace_menu">CONTACTO</a></li>
                 <li class="item_menu"><a href="inicio_sesion.html" class="enlace_menu" id="enlace_sesion">INICIAR SESIÓN</a></li>
             </ul>
@@ -92,18 +109,19 @@
     <!-- CONTENIDO PRINCIPAL -->
     <div style="margin-top: 90px; padding: 20px;">
         <div class="contenedor_titulo_seccion">
-            <h1 class="titulo_seccion">CATÁLOGO DE PRODUCTOS</h1>
+            <h1 class="titulo_seccion">OFERTAS ESPECIALES</h1>
+            <p style="text-align: center; color: #b0b0b0; margin-top: 10px;">¡Productos con descuentos imperdibles!</p>
         </div>
 
         <!-- BARRA DE BÚSQUEDA -->
         <div class="contenedor_busqueda">
             <div class="barra_busqueda">
-                <input type="text" id="input_busqueda" placeholder="Buscar productos por nombre, descripción o categoría..." autocomplete="off">
+                <input type="text" id="input_busqueda" placeholder="Buscar ofertas por nombre, descripción o categoría..." autocomplete="off">
                 <button class="boton_buscar" id="boton_buscar">BUSCAR</button>
             </div>
         </div>
 
-        <div class="contenedor_grid_productos" id="contenedor_catalogo">
+        <div class="contenedor_grid_productos" id="contenedor_ofertas">
             <!-- Se carga dinámicamente con JavaScript -->
         </div>
     </div>
@@ -151,7 +169,7 @@
 
     <script src="backend/main.js"></script>
     <script>
-        let todos_los_productos = [];
+        let todas_las_ofertas = [];
 
         function actualizar_enlace_sesion()
         {
@@ -167,37 +185,50 @@
             }
         }
 
-        function mostrar_productos(productos)
+        function calcular_descuento(precio, precio_anterior)
         {
-            const contenedor = document.getElementById('contenedor_catalogo');
+            if (!precio_anterior || precio_anterior === 0) return 0;
+            const descuento = Math.round(((precio_anterior - precio) / precio_anterior) * 100);
+            return descuento;
+        }
+
+        function mostrar_ofertas(ofertas)
+        {
+            const contenedor = document.getElementById('contenedor_ofertas');
             
             if (!contenedor) return;
             
-            if (productos.length === 0)
+            if (ofertas.length === 0)
             {
-                contenedor.innerHTML = '<div class="mensaje_no_resultados">No se encontraron productos que coincidan con tu búsqueda</div>';
+                contenedor.innerHTML = '<div class="mensaje_no_resultados">No se encontraron ofertas que coincidan con tu búsqueda</div>';
                 return;
             }
             
             contenedor.innerHTML = '';
             
-            productos.forEach(producto =>
+            ofertas.forEach(oferta =>
             {
                 const tarjeta = document.createElement('div');
                 tarjeta.className = 'tarjeta_producto';
                 
-                const precio_anterior_html = producto.precio_anterior && producto.precio_anterior > 0 ?
-                    `<span class="precio_anterior">$${producto.precio_anterior.toFixed(2)}</span>` : '';
+                const descuento = calcular_descuento(oferta.precio, oferta.precio_anterior);
+                
+                const badge_oferta = descuento > 0 ?
+                    `<span class="badge_oferta">-${descuento}%</span>` : '';
+                
+                const precio_anterior_html = oferta.precio_anterior && oferta.precio_anterior > 0 ?
+                    `<span class="precio_anterior">$${oferta.precio_anterior.toFixed(2)}</span>` : '';
                 
                 tarjeta.innerHTML = `
-                    <img src="${producto.imagen}" alt="${producto.nombre}" class="imagen_producto">
-                    <h3 class="titulo_producto">${producto.nombre}</h3>
-                    <p class="descripcion_producto">${producto.descripcion}</p>
+                    ${badge_oferta}
+                    <img src="${oferta.imagen}" alt="${oferta.nombre}" class="imagen_producto" onerror="this.src='https://via.placeholder.com/236x200?text=Sin+imagen'">
+                    <h3 class="titulo_producto">${oferta.nombre}</h3>
+                    <p class="descripcion_producto">${oferta.descripcion}</p>
                     <div class="contenedor_precio">
-                        <span class="precio_actual">$${producto.precio.toFixed(2)}</span>
+                        <span class="precio_actual">$${oferta.precio.toFixed(2)}</span>
                         ${precio_anterior_html}
                     </div>
-                    <button class="boton_agregar" data-id="${producto.id}">AGREGAR AL CARRITO</button>
+                    <button class="boton_agregar" data-id="${oferta.id}">AGREGAR AL CARRITO</button>
                 `;
                 
                 contenedor.appendChild(tarjeta);
@@ -213,57 +244,66 @@
             });
         }
 
-        function filtrar_productos()
+        function filtrar_ofertas()
         {
             const termino_busqueda = document.getElementById('input_busqueda').value.toLowerCase().trim();
             
             if (termino_busqueda === '')
             {
-                mostrar_productos(todos_los_productos);
+                mostrar_ofertas(todas_las_ofertas);
                 return;
             }
             
-            const productos_filtrados = todos_los_productos.filter(producto =>
+            const ofertas_filtradas = todas_las_ofertas.filter(oferta =>
             {
-                return producto.nombre.toLowerCase().includes(termino_busqueda) ||
-                       producto.descripcion.toLowerCase().includes(termino_busqueda) ||
-                       producto.categoria.toLowerCase().includes(termino_busqueda);
+                return oferta.nombre.toLowerCase().includes(termino_busqueda) ||
+                       oferta.descripcion.toLowerCase().includes(termino_busqueda) ||
+                       oferta.categoria.toLowerCase().includes(termino_busqueda);
             });
             
-            mostrar_productos(productos_filtrados);
+            mostrar_ofertas(ofertas_filtradas);
         }
 
-        function cargar_todos_productos()
+        function cargar_ofertas()
         {
-            fetch('/api/productos')
+            fetch('/api/ofertas')
                 .then(response => response.json())
-                .then(productos =>
+                .then(ofertas =>
                 {
-                    todos_los_productos = productos;
-                    localStorage.setItem('productos', JSON.stringify(productos));
-                    mostrar_productos(productos);
+                    todas_las_ofertas = ofertas;
+                    mostrar_ofertas(ofertas);
                 })
-                .catch(error => console.error('Error al cargar productos:', error));
+                .catch(error => {
+                    console.error('Error al cargar ofertas:', error);
+                    document.getElementById('contenedor_ofertas').innerHTML = 
+                        '<div class="mensaje_no_resultados">Error al cargar las ofertas. Por favor, intenta de nuevo más tarde.</div>';
+                });
         }
 
         document.addEventListener('DOMContentLoaded', () =>
         {
             actualizar_enlace_sesion();
-            cargar_todos_productos();
+            cargar_ofertas();
             actualizar_contador_carrito();
             
             const boton_buscar = document.getElementById('boton_buscar');
             const input_busqueda = document.getElementById('input_busqueda');
             
-            boton_buscar.addEventListener('click', filtrar_productos);
-            
-            input_busqueda.addEventListener('keypress', (e) =>
+            if (boton_buscar)
             {
-                if (e.key === 'Enter')
+                boton_buscar.addEventListener('click', filtrar_ofertas);
+            }
+            
+            if (input_busqueda)
+            {
+                input_busqueda.addEventListener('keypress', (e) =>
                 {
-                    filtrar_productos();
-                }
-            });
+                    if (e.key === 'Enter')
+                    {
+                        filtrar_ofertas();
+                    }
+                });
+            }
         });
     </script>
 </body>

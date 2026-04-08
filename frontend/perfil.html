@@ -5,6 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil - Autoparts Store</title>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .mensaje_sin_sesion {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            margin: 40px auto;
+            max-width: 500px;
+        }
+        .mensaje_sin_sesion h2 {
+            color: #ff4444;
+            margin-bottom: 20px;
+        }
+        .mensaje_sin_sesion p {
+            color: #b0b0b0;
+            margin-bottom: 30px;
+        }
+        .boton_redirigir {
+            display: inline-block;
+            background-color: #ff4444;
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .boton_redirigir:hover {
+            background-color: #cc3333;
+        }
+        .enlace_registro {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .enlace_registro a {
+            color: #ff4444;
+            text-decoration: none;
+        }
+        .enlace_registro a:hover {
+            text-decoration: underline;
+        }
+        .datos_perfil {
+            background-color: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .campo_perfil {
+            margin-bottom: 15px;
+        }
+        .campo_perfil strong {
+            color: #ff4444;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .campo_perfil p {
+            color: #e0e0e0;
+        }
+    </style>
 </head>
 <body>
     <!-- BARRA DE NAVEGACIÓN -->
@@ -15,27 +74,30 @@
 
         <nav class="menu_navegacion">
             <ul class="lista_menu">
-                <li class="item_menu"><a href="index.html" class="enlace_menu">INICIO</a></li>
+                <li class="item_menu"><a href="inicio.html" class="enlace_menu">INICIO</a></li>
                 <li class="item_menu"><a href="catalogo.html" class="enlace_menu">CATÁLOGO</a></li>
-                <li class="item_menu"><a href="index.html#ofertas" class="enlace_menu">OFERTAS</a></li>
+                <li class="item_menu"><a href="ofertas.html" class="enlace_menu">OFERTAS</a></li>
                 <li class="item_menu"><a href="contacto.html" class="enlace_menu">CONTACTO</a></li>
                 <li class="item_menu"><a href="perfil.html" class="enlace_menu activo" id="enlace_sesion">MI PERFIL</a></li>
             </ul>
         </nav>
 
-        <div class="contenedor_carrito">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='21' r='1'%3E%3C/circle%3E%3Ccircle cx='20' cy='21' r='1'%3E%3C/circle%3E%3Cpath d='M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6'%3E%3C/path%3E%3C/svg%3E" alt="Carrito" class="icono_carrito">
-            <span class="contador_carrito">0</span>
+        <div class="contenedor_acciones">
+            <div class="contenedor_carrito" id="boton_carrito">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='21' r='1'%3E%3C/circle%3E%3Ccircle cx='20' cy='21' r='1'%3E%3C/circle%3E%3Cpath d='M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6'%3E%3C/path%3E%3C/svg%3E" alt="Carrito" class="icono_carrito">
+                <span class="contador_carrito">0</span>
+            </div>
+            <div class="contenedor_perfil" id="boton_perfil">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'%3E%3C/path%3E%3Ccircle cx='12' cy='7' r='4'%3E%3C/circle%3E%3C/svg%3E" alt="Perfil" class="icono_perfil" id="icono_perfil">
+            </div>
         </div>
     </header>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <div class="contenedor_formulario">
+    <div class="contenedor_formulario" id="contenedor_principal">
         <h1 class="titulo_formulario">MI PERFIL</h1>
         
-        <div id="datos_perfil"></div>
-
-        <button class="boton_formulario" onclick="cerrar_sesion()" style="background-color: #ff4444;">CERRAR SESIÓN</button>
+        <div id="contenido_perfil"></div>
     </div>
 
     <!-- PIE DE PÁGINA -->
@@ -49,10 +111,9 @@
             <div class="columna_footer">
                 <h3 class="titulo_footer">ENLACES RÁPIDOS</h3>
                 <ul class="lista_footer">
-                    <li><a href="index.html" class="enlace_footer">Inicio</a></li>
-                    <li><a href="catalogo.html" class="enlace_footer">Catálogo</a></li>
-                    <li><a href="contacto.html" class="enlace_footer">Contacto</a></li>
-                    <li><a href="terminos.html" class="enlace_footer">Términos</a></li>
+                    <li><a href="acerca_de_nosotros.html" class="enlace_footer">Acerca de Nosotros</a></li>
+                    <li><a href="preguntas_frecuentes.html" class="enlace_footer">Preguntas Frecuentes</a></li>
+                    <li><a href="terminos.html" class="enlace_footer">Términos y Condiciones</a></li>
                 </ul>
             </div>
 
@@ -80,58 +141,80 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="backend/main.js"></script>
     <script>
-        function cargar_datos_perfil()
+        function mostrar_sin_sesion()
         {
-            const usuario = sessionStorage.getItem('usuario');
-
-            if (!usuario)
-            {
-                window.location.href = 'inicio_sesion.html';
-                return;
-            }
-
-            const datos_usuario = JSON.parse(usuario);
-            const contenedor = document.getElementById('datos_perfil');
-
+            const contenedor = document.getElementById('contenido_perfil');
+            
             contenedor.innerHTML = `
-                <div style="background-color: #1a1a1a; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                    <div style="margin-bottom: 15px;">
-                        <strong style="color: #ff4444;">Nombre:</strong>
-                        <p style="color: #e0e0e0;">${datos_usuario.nombre} ${datos_usuario.apellido_paterno} ${datos_usuario.apellido_materno || ''}</p>
-                    </div>
-
-                    <div style="margin-bottom: 15px;">
-                        <strong style="color: #ff4444;">Correo electrónico:</strong>
-                        <p style="color: #e0e0e0;">${datos_usuario.correo}</p>
-                    </div>
-
-                    <div style="margin-bottom: 15px;">
-                        <strong style="color: #ff4444;">Teléfono:</strong>
-                        <p style="color: #e0e0e0;">${datos_usuario.telefono || 'No especificado'}</p>
-                    </div>
-
-                    <div style="margin-bottom: 15px;">
-                        <strong style="color: #ff4444;">Dirección:</strong>
-                        <p style="color: #e0e0e0;">${datos_usuario.direccion || 'No especificada'}</p>
-                    </div>
-
-                    <div>
-                        <strong style="color: #ff4444;">Fecha de registro:</strong>
-                        <p style="color: #e0e0e0;">${new Date(datos_usuario.fecha_registro).toLocaleDateString()}</p>
+                <div class="mensaje_sin_sesion">
+                    <h2>🔒 SESIÓN NO INICIADA</h2>
+                    <p>Debes iniciar sesión para ver tu perfil</p>
+                    <a href="inicio_sesion.html" class="boton_redirigir">INICIAR SESIÓN</a>
+                    <div class="enlace_registro">
+                        <a href="registro.html">¿No tienes cuenta? Regístrate aquí</a>
                     </div>
                 </div>
             `;
         }
 
+        function mostrar_perfil()
+        {
+            const usuario = sessionStorage.getItem('usuario');
+            
+            if (!usuario)
+            {
+                mostrar_sin_sesion();
+                return;
+            }
+            
+            const datos_usuario = JSON.parse(usuario);
+            const contenedor = document.getElementById('contenido_perfil');
+            
+            contenedor.innerHTML = `
+                <div class="datos_perfil">
+                    <div class="campo_perfil">
+                        <strong>👤 Nombre completo:</strong>
+                        <p>${datos_usuario.nombre} ${datos_usuario.apellido_paterno} ${datos_usuario.apellido_materno || ''}</p>
+                    </div>
+                    
+                    <div class="campo_perfil">
+                        <strong>📧 Correo electrónico:</strong>
+                        <p>${datos_usuario.correo}</p>
+                    </div>
+                    
+                    <div class="campo_perfil">
+                        <strong>📞 Teléfono:</strong>
+                        <p>${datos_usuario.telefono || 'No especificado'}</p>
+                    </div>
+                    
+                    <div class="campo_perfil">
+                        <strong>📍 Dirección:</strong>
+                        <p>${datos_usuario.direccion || 'No especificada'}</p>
+                    </div>
+                    
+                    <div class="campo_perfil">
+                        <strong>📅 Fecha de registro:</strong>
+                        <p>${new Date(datos_usuario.fecha_registro).toLocaleDateString()}</p>
+                    </div>
+                </div>
+                
+                <button class="boton_formulario" onclick="cerrar_sesion()" style="background-color: #ff4444;">CERRAR SESIÓN</button>
+            `;
+        }
+        
         function cerrar_sesion()
         {
             sessionStorage.removeItem('usuario');
-            window.location.href = 'index.html';
+            window.location.href = 'inicio.html';
         }
 
-        document.addEventListener('DOMContentLoaded', cargar_datos_perfil);
+        document.addEventListener('DOMContentLoaded', () =>
+        {
+            mostrar_perfil();
+            actualizar_contador_carrito();
+        });
     </script>
 </body>
 </html>

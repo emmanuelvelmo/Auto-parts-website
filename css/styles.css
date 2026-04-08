@@ -78,6 +78,12 @@ body {
     border-bottom: 2px solid #ff4444;
 }
 
+.contenedor_acciones {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 .contenedor_carrito {
     position: relative;
     cursor: pointer;
@@ -109,6 +115,22 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.contenedor_perfil {
+    cursor: pointer;
+}
+
+.icono_perfil {
+    width: 30px;
+    height: 30px;
+    filter: invert(1);
+    opacity: 0.9;
+    transition: transform 0.2s;
+}
+
+.icono_perfil:hover {
+    transform: scale(1.1);
 }
 
 /* HERO SECTION */
@@ -578,7 +600,7 @@ body {
         gap: 1rem;
     }
 
-    .contenedor_carrito {
+    .contenedor_acciones {
         position: absolute;
         top: 20px;
         right: 20px;

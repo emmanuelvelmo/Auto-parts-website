@@ -133,6 +133,67 @@ function escribir_ventas(ventas)
     }
 }
 
+function obtener_carrito_usuario(id_usuario)
+{
+    const carrito = leer_carrito();
+    const carrito_usuario = carrito.filter(item => item.id_usuario == id_usuario);
+    return carrito_usuario;
+}
+
+function agregar_producto_carrito(id_usuario, id_producto)
+{
+    console.log('agregar_producto_carrito llamado con:', id_usuario, id_producto);
+    
+    const carrito = leer_carrito();
+    console.log('Carrito actual:', carrito);
+    
+    const nuevo_item = {
+        id_usuario: id_usuario,
+        id_producto: id_producto,
+        fecha_agregado: new Date().toISOString()
+    };
+    
+    carrito.push(nuevo_item);
+    console.log('Nuevo carrito:', carrito);
+    
+    escribir_carrito(carrito);
+    
+    return true;
+}
+
+function eliminar_producto_carrito(id_usuario, id_producto)
+{
+    let carrito = leer_carrito();
+    
+    let indice_eliminar = -1;
+    
+    for (let iter_val = 0; iter_val < carrito.length; iter_val++)
+    {
+        if (carrito[iter_val].id_usuario == id_usuario && carrito[iter_val].id_producto == id_producto)
+        {
+            indice_eliminar = iter_val;
+            break;
+        }
+    }
+    
+    if (indice_eliminar !== -1)
+    {
+        carrito.splice(indice_eliminar, 1);
+        escribir_carrito(carrito);
+        return true;
+    }
+    
+    return false;
+}
+
+function vaciar_carrito_usuario(id_usuario)
+{
+    let carrito = leer_carrito();
+    carrito = carrito.filter(item => item.id_usuario != id_usuario);
+    escribir_carrito(carrito);
+    return true;
+}
+
 module.exports = {
     leer_usuarios,
     escribir_usuarios,
@@ -141,5 +202,9 @@ module.exports = {
     leer_carrito,
     escribir_carrito,
     leer_ventas,
-    escribir_ventas
+    escribir_ventas,
+    obtener_carrito_usuario,
+    agregar_producto_carrito,
+    eliminar_producto_carrito,
+    vaciar_carrito_usuario
 };

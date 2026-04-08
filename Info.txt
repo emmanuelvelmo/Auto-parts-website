@@ -8,11 +8,11 @@ Auto parts website/
 ├── backend/        (Se trabajará sobre esto)
 ├── frontend/        (Se trabajará sobre esto)
 ├── data/        (Se trabajará sobre esto)
-│   └── index.html        (Página principal de inicio)
+│   └── inicio.html        (Página principal de inicio)
 ├── It_Dir.py             (Script Python para ver árbol de directorio del proyecto (se muestra el árbol al modelo NLP asistente (tú))). Herramienta, no es parte del proyecto, sólo contexto
 ├── It_Fil.py             (Script Python para ver texto en cada archivo (se muestra código al modelo NLP asistente (tú))). Herramienta, no es parte del proyecto, sólo contexto
-├── Prompt - Code.txt     (Guía de estilo de programación para el modelo NLP asistente (tú)), no es parte del proyecto, sólo contexto
-├── Prompt - Web.txt    (Información sobre el proyecto para el modelo NLP asistente (tú)), no es parte del proyecto, sólo contexto
+├── Prompt - Project.txt     (Guía de estilo de programación para el modelo NLP asistente (tú)), no es parte del proyecto, sólo contexto
+├── Info.txt    (Información sobre el proyecto para el modelo NLP asistente (tú)), no es parte del proyecto, sólo contexto
 └── Auto parts website.bat         (Acceso directo a index.html)
 
 REGLAS DE NOMBRADO PARA ARCHIVOS HTML
