@@ -5,15 +5,16 @@ Enfoque: Desarrollo minimalista y progresivo
 
 ESTRUCTURA DE ARCHIVOS ACTUAL
 Auto parts website/
-├── backend/        (Se trabajará sobre esto)
-├── frontend/        (Se trabajará sobre esto)
-├── data/        (Se trabajará sobre esto)
-│   └── inicio.html        (Página principal de inicio)
-├── It_Dir.py             (Script Python para ver árbol de directorio del proyecto (se muestra el árbol al modelo NLP asistente (tú))). Herramienta, no es parte del proyecto, sólo contexto
-├── It_Fil.py             (Script Python para ver texto en cada archivo (se muestra código al modelo NLP asistente (tú))). Herramienta, no es parte del proyecto, sólo contexto
+├── backend/     (Se trabajará sobre esto)
+├── css/     (Se trabajará sobre esto)
+├── data/     (Se trabajará sobre esto)
+├── frontend/     (Se trabajará sobre esto)
+│   └── inicio.html     (Página principal de inicio)
+├── Directory generator script.py     (Script Python para ver árbol de directorio del proyecto (se muestra el árbol al modelo NLP asistente (tú))). Herramienta, no es parte del proyecto, sólo contexto
+├── Info.txt     (Información sobre el proyecto para el modelo NLP asistente (tú)), no es parte del proyecto, sólo contexto
+├── It_Fil.py     (Script Python para ver texto en cada archivo (se muestra código al modelo NLP asistente (tú))). Herramienta, no es parte del proyecto, sólo contexto
 ├── Prompt - Project.txt     (Guía de estilo de programación para el modelo NLP asistente (tú)), no es parte del proyecto, sólo contexto
-├── Info.txt    (Información sobre el proyecto para el modelo NLP asistente (tú)), no es parte del proyecto, sólo contexto
-└── Auto parts website.bat         (Acceso directo a index.html)
+└── Start.bat     (Acceso directo a inicio.html)
 
 REGLAS DE NOMBRADO PARA ARCHIVOS HTML
 Nomenclatura: minúsculas con guiones bajos sin acentuar
