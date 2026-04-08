@@ -1,0 +1,802 @@
+[
+  {
+    "id": 1,
+    "nombre": "JUEGO PASTILLAS FRENO",
+    "descripcion": "Para Honda Civic 2016-2021",
+    "categoria": "frenos",
+    "precio": 45.99,
+    "precio_anterior": 65.99,
+    "imagen": "https://i.pinimg.com/236x/23/fe/68/23fe68178340555d4e34b6951891140c.jpg",
+    "destacado": true
+  },
+  {
+    "id": 2,
+    "nombre": "FILTRO DE AIRE DEPORTIVO",
+    "descripcion": "Universal - Alto flujo",
+    "categoria": "motor",
+    "precio": 32.50,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/0c/da/a5/0cdaa5061857d79cf9c3c73bf443e783.jpg",
+    "destacado": true
+  },
+  {
+    "id": 3,
+    "nombre": "AMORTIGUADOR TRASERO",
+    "descripcion": "Para Toyota Corolla 2010-2015",
+    "categoria": "suspension",
+    "precio": 78.25,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/15/bb/16/15bb1632252b17e611566cb32ce7d776.jpg",
+    "destacado": true
+  },
+  {
+    "id": 4,
+    "nombre": "BOMBA DE AGUA",
+    "descripcion": "Nissan Sentra 2013-2018",
+    "categoria": "motor",
+    "precio": 55.75,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/51/a8/4a/51a84abe06f3e85f43fa3fbf9bc91169.jpg",
+    "destacado": true
+  },
+  {
+    "id": 5,
+    "nombre": "SENSOR DE OXÍGENO",
+    "descripcion": "Universal 4 hilos",
+    "categoria": "electrico",
+    "precio": 28.99,
+    "precio_anterior": 0,
+    "imagen": "https://shop.advanceautoparts.com/wcsstore/CVWEB/staticproductimage/291/large/15470126_bos_15510_pri_larg.jpg",
+    "destacado": true
+  },
+  {
+    "id": 6,
+    "nombre": "KIT DE EMBRAGUE",
+    "descripcion": "Mitsubishi Lancer 2008-2013",
+    "categoria": "transmision",
+    "precio": 189.99,
+    "precio_anterior": 0,
+    "imagen": "https://shop.advanceautoparts.com/wcsstore/CVWEB/staticproductimage/244/large/10640321_luk_05065_pri_larg.jpg",
+    "destacado": true
+  },
+  {
+    "id": 7,
+    "nombre": "BATERÍA DE ALTO RENDIMIENTO",
+    "descripcion": "12V 70Ah para todas las marcas",
+    "categoria": "electrico",
+    "precio": 125.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/31/10/69/311069f9df943d4f3494d1ce9f49bc3e.jpg",
+    "destacado": false
+  },
+  {
+    "id": 8,
+    "nombre": "DISCO DE FRENO",
+    "descripcion": "Delantero para Ford Focus",
+    "categoria": "frenos",
+    "precio": 89.99,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/23/8b/a1/238ba1d244d43924d5fd5d49965f44bb.jpg",
+    "destacado": false
+  },
+  {
+    "id": 9,
+    "nombre": "BUJÍA DE IRIDIO",
+    "descripcion": "Set de 4 unidades",
+    "categoria": "motor",
+    "precio": 35.50,
+    "precio_anterior": 45.00,
+    "imagen": "https://i.pinimg.com/236x/89/59/1a/89591a999890fe67ddafdaa6c2728053.jpg",
+    "destacado": false
+  },
+  {
+    "id": 10,
+    "nombre": "RODAMIENTO DE RUEDA",
+    "descripcion": "Para Chevrolet Spark",
+    "categoria": "suspension",
+    "precio": 42.75,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/7f/3c/42/7f3c42e03efcda7ae9dd0f7462f1c8e6.jpg",
+    "destacado": false
+  },
+  {
+    "id": 11,
+    "nombre": "CORREA DE DISTRIBUCIÓN",
+    "descripcion": "Kits completo con tensor",
+    "categoria": "motor",
+    "precio": 95.00,
+    "precio_anterior": 120.00,
+    "imagen": "https://i.pinimg.com/236x/a2/29/92/a2299258045ab122387389aa24d16661.jpg",
+    "destacado": false
+  },
+  {
+    "id": 12,
+    "nombre": "FARO DELANTERO",
+    "descripcion": "Lado derecho para VW Golf",
+    "categoria": "iluminacion",
+    "precio": 155.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/bf/56/39/bf5639c758d66c63416ab8486232bacd.jpg",
+    "destacado": false
+  },
+  {
+    "id": 13,
+    "nombre": "ESPEJO RETROVISOR",
+    "descripcion": "Eléctrico con calefacción",
+    "categoria": "carroceria",
+    "precio": 68.50,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/58/f2/e4/58f2e472b779c7c9a1ceb88614d5fb79.jpg",
+    "destacado": false
+  },
+  {
+    "id": 14,
+    "nombre": "RADIADOR",
+    "descripcion": "Aluminio para Mazda 3",
+    "categoria": "refrigeracion",
+    "precio": 210.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/06/0d/b1/060db107c97c4c97e9a9b90834502aad.jpg",
+    "destacado": false
+  },
+  {
+    "id": 15,
+    "nombre": "ALTERNADOR",
+    "descripcion": "110A para Hyundai Accent",
+    "categoria": "electrico",
+    "precio": 175.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/4f/62/bb/4f62bbbc3286994759a29a2369bc8177.jpg",
+    "destacado": false
+  },
+  {
+    "id": 16,
+    "nombre": "MOTOR DE ARRANQUE",
+    "descripcion": "12V 1.4kW para Chevrolet",
+    "categoria": "electrico",
+    "precio": 145.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/1f/5b/be/1f5bbe5236bfa1d8c056277c6bc13481.jpg",
+    "destacado": false
+  },
+  {
+    "id": 17,
+    "nombre": "CALAVERA TRASERA",
+    "descripcion": "LED para Nissan Versa",
+    "categoria": "iluminacion",
+    "precio": 98.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/b3/31/f1/b331f1b54e2a1c0defb1b855f4639396.jpg",
+    "destacado": false
+  },
+  {
+    "id": 18,
+    "nombre": "PARACHOQUES DELANTERO",
+    "descripcion": "Sin pintar para Toyota Yaris",
+    "categoria": "carroceria",
+    "precio": 185.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/15/81/77/158177ad7fe21ce3d1a9c9fe1787aedd.jpg",
+    "destacado": false
+  },
+  {
+    "id": 19,
+    "nombre": "TERMOSTATO",
+    "descripcion": "82°C universal",
+    "categoria": "refrigeracion",
+    "precio": 18.50,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/55/5f/93/555f9372d090aa25105be91e0e9784a7.jpg",
+    "destacado": false
+  },
+  {
+    "id": 20,
+    "nombre": "BOMBA DE DIRECCIÓN",
+    "descripcion": "Hidráulica para Honda Accord",
+    "categoria": "direccion",
+    "precio": 165.00,
+    "precio_anterior": 0,
+    "imagen": "https://shop.advanceautoparts.com/wcsstore/CVWEB/staticproductimage/48241/large/12071164_gmo_hpm1029_pri_larg.jpg",
+    "destacado": false
+  },
+  {
+    "id": 21,
+    "nombre": "ESCAPE DEPORTIVO",
+    "descripcion": "Acero inoxidable 2.5 pulgadas",
+    "categoria": "escape",
+    "precio": 250.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/7f/13/79/7f1379ce58ad3b0358c59901ffec2f4a.jpg",
+    "destacado": false
+  },
+  {
+    "id": 22,
+    "nombre": "PASTILLAS FRENO CERÁMICAS",
+    "descripcion": "Para Ford Fiesta",
+    "categoria": "frenos",
+    "precio": 55.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/f5/d1/5e/f5d15e773201849ce8a37f570783e833.jpg",
+    "destacado": false
+  },
+  {
+    "id": 23,
+    "nombre": "FILTRO DE ACEITE",
+    "descripcion": "Alta capacidad universal",
+    "categoria": "motor",
+    "precio": 12.99,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/b8/f0/15/b8f015781bb1f4d7c79df5a5c1179303.jpg",
+    "destacado": false
+  },
+  {
+    "id": 24,
+    "nombre": "RESORTE DE SUSPENSIÓN",
+    "descripcion": "Par trasero para Renault",
+    "categoria": "suspension",
+    "precio": 72.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/13/39/f4/1339f4e392a6dfaa30a4b6ab098faee4.jpg",
+    "destacado": false
+  },
+  {
+    "id": 25,
+    "nombre": "LIMPIA PARABRISAS",
+    "descripcion": "Juego universal 22/22 pulgadas",
+    "categoria": "carroceria",
+    "precio": 25.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/5d/c4/2f/5dc42fa31c26705cce9a2c16ac2c949d.jpg",
+    "destacado": false
+  },
+  {
+    "id": 26,
+    "nombre": "BOMBA DE COMBUSTIBLE",
+    "descripcion": "Eléctrica universal 12V",
+    "categoria": "motor",
+    "precio": 85.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/41/16/7a/41167aa3ce1019a917d48242a4b9984c.jpg",
+    "destacado": false
+  },
+  {
+    "id": 27,
+    "nombre": "SOPORTE DE MOTOR",
+    "descripcion": "Para Volkswagen Jetta",
+    "categoria": "motor",
+    "precio": 48.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/31/d0/89/31d089e6ab5bcc95ca679ad1031bf543.jpg",
+    "destacado": false
+  },
+  {
+    "id": 28,
+    "nombre": "CABLES DE BUJÍAS",
+    "descripcion": "Juego de 4 cables de alta performance",
+    "categoria": "electrico",
+    "precio": 38.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/54/3a/99/543a9994b6152a1c75f2958572f9fa68.jpg",
+    "destacado": false
+  },
+  {
+    "id": 29,
+    "nombre": "BOCINA ELÉCTRICA",
+    "descripcion": "Par de tonos altos y bajos",
+    "categoria": "electrico",
+    "precio": 22.50,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/02/81/27/028127aa8a02710d81ba86a5930e369d.jpg",
+    "destacado": false
+  },
+  {
+    "id": 30,
+    "nombre": "TAPA DE VÁLVULAS",
+    "descripcion": "Aluminio para Honda",
+    "categoria": "motor",
+    "precio": 62.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/4d/d2/77/4dd27714f875a7344e04c66dd2ce0a12.jpg",
+    "destacado": false
+  },
+  {
+    "id": 31,
+    "nombre": "ACUMULADOR DE FRENO",
+    "descripcion": "Para sistemas ABS",
+    "categoria": "frenos",
+    "precio": 195.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/a0/ed/0f/a0ed0ffdcd909455718d627b35f43779.jpg",
+    "destacado": false
+  },
+  {
+    "id": 32,
+    "nombre": "MANIJA DE PUERTA",
+    "descripcion": "Cromada para Chevrolet",
+    "categoria": "carroceria",
+    "precio": 35.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/fa/bf/f9/fabff96bc83c468dc4e8da1149f79ce9.jpg",
+    "destacado": false
+  },
+  {
+    "id": 33,
+    "nombre": "BANDA DE ACCESORIOS",
+    "descripcion": "Poli V 6 canales universal",
+    "categoria": "motor",
+    "precio": 28.00,
+    "precio_anterior": 0,
+    "imagen": "https://shop.advanceautoparts.com/wcsstore/CVWEB/staticproductimage/N3401A/large/50169352_ptl_w54132_pri_larg.jpg",
+    "destacado": false
+  },
+  {
+    "id": 34,
+    "nombre": "FARO ANTINIEBLA",
+    "descripcion": "LED redondo universal",
+    "categoria": "iluminacion",
+    "precio": 42.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/b4/97/5a/b4975a2ebdd4dec5edeab664656efa53.jpg",
+    "destacado": false
+  },
+  {
+    "id": 35,
+    "nombre": "PALIER DE TRANSMISIÓN",
+    "descripcion": "Lado derecho para Nissan",
+    "categoria": "transmision",
+    "precio": 135.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/f2/ea/9e/f2ea9e74a32a2ee0fb3a55e3c3e26a0e.jpg",
+    "destacado": false
+  },
+  {
+    "id": 36,
+    "nombre": "VENTOSA DE TECHO",
+    "descripcion": "Universal, reduce ruido de viento",
+    "categoria": "carroceria",
+    "precio": 55.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/0f/a0/71/0fa071b0686774ea65307bf1109359a5.jpg",
+    "destacado": false
+  },
+  {
+    "id": 37,
+    "nombre": "CALENTADOR DE ASIENTOS",
+    "descripcion": "Kits universal 12V",
+    "categoria": "electrico",
+    "precio": 78.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/a9/a2/57/a9a257575af507562c7c03b567f0676e.jpg",
+    "destacado": false
+  },
+  {
+    "id": 38,
+    "nombre": "CUBRE VOLANTE",
+    "descripcion": "Cuero sintético deportivo",
+    "categoria": "interior",
+    "precio": 32.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/f3/54/1d/f3541d4c7bda72df6c03734bae2db178.jpg",
+    "destacado": false
+  },
+  {
+    "id": 39,
+    "nombre": "ALFOMBRAS PARA AUTO",
+    "descripcion": "Juego 4 piezas universal",
+    "categoria": "interior",
+    "precio": 45.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/9b/43/8a/9b438ad8aeeca3ef1d78c0d361e3db2b.jpg",
+    "destacado": false
+  },
+  {
+    "id": 40,
+    "nombre": "SELLADOR DE MOTOR",
+    "descripcion": "Alta temperatura universal",
+    "categoria": "motor",
+    "precio": 15.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/10/f1/69/10f16905f5aa2783196986219e9cf3f5.jpg",
+    "destacado": false
+  },
+  {
+    "id": 41,
+    "nombre": "KIT DE JUNTAS",
+    "descripcion": "Para tapa de válvulas universal",
+    "categoria": "motor",
+    "precio": 25.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/7f/b9/69/7fb96937b9b1fd951e3278a48161fabe.jpg",
+    "destacado": false
+  },
+  {
+    "id": 42,
+    "nombre": "SENSOR DE ESTACIONAMIENTO",
+    "descripcion": "Kits 4 sensores con pantalla",
+    "categoria": "electrico",
+    "precio": 52.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/34/60/f5/3460f5342831cd4dde548666c7af40a8.jpg",
+    "destacado": false
+  },
+  {
+    "id": 43,
+    "nombre": "LÁMPARA LED INTERIOR",
+    "descripcion": "Blanco frío 12V",
+    "categoria": "iluminacion",
+    "precio": 12.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/68/4a/5a/684a5a83369cfe84b2c9fa2c0c4c11bb.jpg",
+    "destacado": false
+  },
+  {
+    "id": 44,
+    "nombre": "CARGADOR USB",
+    "descripcion": "Doble puerto para auto",
+    "categoria": "electrico",
+    "precio": 18.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/a5/b2/53/a5b253e8177da62f340ea433baec88a7.jpg",
+    "destacado": false
+  },
+  {
+    "id": 45,
+    "nombre": "KIT DE HERRAMIENTAS",
+    "descripcion": "Básico para emergencias",
+    "categoria": "accesorios",
+    "precio": 35.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/29/e9/77/29e9775ad7a60d303b54a63a07d7afd5.jpg",
+    "destacado": false
+  },
+  {
+    "id": 46,
+    "nombre": "BOTIQUÍN PRIMEROS AUXILIOS",
+    "descripcion": "Completo para auto",
+    "categoria": "accesorios",
+    "precio": 28.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/03/13/87/031387bf0c90124da639bf8ee34cf382.jpg",
+    "destacado": false
+  },
+  {
+    "id": 47,
+    "nombre": "EXTINTOR",
+    "descripcion": "1kg ABC para auto",
+    "categoria": "accesorios",
+    "precio": 25.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/c1/04/e3/c104e3fd36cf462e47c3432db6b73866.jpg",
+    "destacado": false
+  },
+  {
+    "id": 48,
+    "nombre": "TRIÁNGULO DE SEGURIDAD",
+    "descripcion": "Reflectante plegable",
+    "categoria": "accesorios",
+    "precio": 15.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/a5/ab/81/a5ab81cc6854d75ac3be20a90a22ab7b.jpg",
+    "destacado": false
+  },
+  {
+    "id": 49,
+    "nombre": "CHALECO REFLECTANTE",
+    "descripcion": "Talla única universal",
+    "categoria": "accesorios",
+    "precio": 12.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/be/62/5d/be625d5f571c142008fbb5cb5ad488fc.jpg",
+    "destacado": false
+  },
+  {
+    "id": 50,
+    "nombre": "CARGA DE AIRE ACONDICIONADO",
+    "descripcion": "R134a con manómetro",
+    "categoria": "refrigeracion",
+    "precio": 45.00,
+    "precio_anterior": 0,
+    "imagen": "https://shop.advanceautoparts.com/wcsstore/CVWEB/staticproductimage/2/large/50089861_cqb_97349_pri_larg.jpg",
+    "destacado": false
+  },
+  {
+    "id": 51,
+    "nombre": "FILTRO DE CABINA",
+    "descripcion": "Antialérgico universal",
+    "categoria": "refrigeracion",
+    "precio": 22.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/52/90/ce/5290cea7921f2434b00884fef82e9961.jpg",
+    "destacado": false
+  },
+  {
+    "id": 52,
+    "nombre": "LÍQUIDO DE FRENOS",
+    "descripcion": "DOT 4 500ml",
+    "categoria": "frenos",
+    "precio": 12.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/37/c9/9b/37c99bab3f6a2ac253262c98f4301ca5.jpg",
+    "destacado": false
+  },
+  {
+    "id": 53,
+    "nombre": "ACEITE DE MOTOR",
+    "descripcion": "Sintético 5W30 4L",
+    "categoria": "motor",
+    "precio": 48.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/9c/b7/51/9cb75180c7149209cbcf15962ac6a84d.jpg",
+    "destacado": false
+  },
+  {
+    "id": 54,
+    "nombre": "REFRIGERANTE PARA MOTOR",
+    "descripcion": "Concentrado 3.78L",
+    "categoria": "refrigeracion",
+    "precio": 25.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/7f/38/f9/7f38f9d7c88841c1cc95c15a6dbee4f4.jpg",
+    "destacado": false
+  },
+  {
+    "id": 55,
+    "nombre": "LIMPIADOR DE INYECTORES",
+    "descripcion": "Aditivo 350ml",
+    "categoria": "motor",
+    "precio": 15.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/eb/cf/a4/ebcfa45ff827e47da00bbc4f7bd3c931.jpg",
+    "destacado": false
+  },
+  {
+    "id": 56,
+    "nombre": "CERA PARA AUTO",
+    "descripcion": "Líquida premium",
+    "categoria": "carroceria",
+    "precio": 28.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/0e/ae/2c/0eae2ce76e589a354e79a6125fbf4e38.jpg",
+    "destacado": false
+  },
+  {
+    "id": 57,
+    "nombre": "PAÑO DE MICROFIBRA",
+    "descripcion": "Paquete 3 unidades",
+    "categoria": "accesorios",
+    "precio": 12.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/62/27/87/62278776960b4065d6585ddb82f25fbd.jpg",
+    "destacado": false
+  },
+  {
+    "id": 58,
+    "nombre": "AROMATIZANTE PARA AUTO",
+    "descripcion": "Vainilla 50ml",
+    "categoria": "accesorios",
+    "precio": 8.00,
+    "precio_anterior": 0,
+    "imagen": "https://shop.advanceautoparts.com/wcsstore/CVWEB/staticproductimage/N3572C/large/10861820_mgr_g16602_pri_larg.jpg",
+    "destacado": false
+  },
+  {
+    "id": 59,
+    "nombre": "KIT DE REPARACIÓN DE NEUMÁTICOS",
+    "descripcion": "Incluye 5 parches",
+    "categoria": "accesorios",
+    "precio": 18.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/6e/b2/2f/6eb22f96a081e847bf6bc90613d99b85.jpg",
+    "destacado": false
+  },
+  {
+    "id": 60,
+    "nombre": "COMPRESOR DE AIRE PORTÁTIL",
+    "descripcion": "12V para emergencias",
+    "categoria": "accesorios",
+    "precio": 65.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/2f/40/91/2f40912bc5dc2e18913225f865329e4c.jpg",
+    "destacado": false
+  },
+  {
+    "id": 61,
+    "nombre": "CABLES DE ARRANQUE",
+    "descripcion": "2 metros 4 AWG",
+    "categoria": "accesorios",
+    "precio": 35.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/b4/1a/86/b41a868701811c279eb8c3d8755bf4f3.jpg",
+    "destacado": false
+  },
+  {
+    "id": 62,
+    "nombre": "MANÓMETRO DE NEUMÁTICOS",
+    "descripcion": "Digital con luz LED",
+    "categoria": "accesorios",
+    "precio": 22.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/fd/43/4e/fd434ebdc580abb457a31f7e001bc83e.jpg",
+    "destacado": false
+  },
+  {
+    "id": 63,
+    "nombre": "SOPORTE PARA TELÉFONO",
+    "descripcion": "Ventosa universal",
+    "categoria": "accesorios",
+    "precio": 25.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/88/11/e6/8811e6e6799d131b94898a8efef2c40f.jpg",
+    "destacado": false
+  },
+  {
+    "id": 64,
+    "nombre": "CÁMARA DE REVERSA",
+    "descripcion": "Inalámbrica con pantalla",
+    "categoria": "electrico",
+    "precio": 85.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/a1/33/91/a1339157f00b08886825efedf4929dd9.jpg",
+    "destacado": false
+  },
+  {
+    "id": 65,
+    "nombre": "RADIO BLUETOOTH",
+    "descripcion": "1 DIN con USB",
+    "categoria": "electrico",
+    "precio": 120.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/8c/58/95/8c5895dc4ab21cd21e97c3d31afcd88e.jpg",
+    "destacado": false
+  },
+  {
+    "id": 66,
+    "nombre": "ALTAVOCES",
+    "descripcion": "6.5 pulgadas 300W",
+    "categoria": "electrico",
+    "precio": 95.00,
+    "precio_anterior": 0,
+    "imagen": "https://shop.advanceautoparts.com/wcsstore/CVWEB/staticproductimage/N3082/large/10633339_dlc_dls654_pri_larg.jpg",
+    "destacado": false
+  },
+  {
+    "id": 67,
+    "nombre": "SUBGRAVADOR",
+    "descripcion": "8 pulgadas 400W",
+    "categoria": "electrico",
+    "precio": 145.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/e0/57/d4/e057d49f87db0fabbcc43e06fd74dd04.jpg",
+    "destacado": false
+  },
+  {
+    "id": 68,
+    "nombre": "AMPLIFICADOR",
+    "descripcion": "4 canales 800W",
+    "categoria": "electrico",
+    "precio": 175.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/a4/9d/87/a49d873a6e66d807c4dd1fe586123d7d.jpg",
+    "destacado": false
+  },
+  {
+    "id": 69,
+    "nombre": "KIT DE INSTALACIÓN DE SONIDO",
+    "descripcion": "Cables y conectores",
+    "categoria": "electrico",
+    "precio": 35.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/28/bc/76/28bc76c868a84f54daa94107c7c4580c.jpg",
+    "destacado": false
+  },
+  {
+    "id": 70,
+    "nombre": "DEFENSA DELANTERA",
+    "descripcion": "Deportiva para Chevrolet",
+    "categoria": "carroceria",
+    "precio": 220.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/b0/9c/d0/b09cd016ebfc6d0001d4eba56b65eebe.jpg",
+    "destacado": false
+  },
+  {
+    "id": 71,
+    "nombre": "ALETAS LATERALES",
+    "descripcion": "Par de piezas universal",
+    "categoria": "carroceria",
+    "precio": 88.00,
+    "precio_anterior": 0,
+    "imagen": "https://shop.advanceautoparts.com/wcsstore/CVWEB/staticproductimage/N3569/large/50176943_ptl_w80755_pri_larg.jpg",
+    "destacado": false
+  },
+  {
+    "id": 72,
+    "nombre": "SPOILER TRASERO",
+    "descripcion": "Poliuretano universal",
+    "categoria": "carroceria",
+    "precio": 115.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/a7/0f/0d/a70f0da03ae0e5c88fe511ad39b8f561.jpg",
+    "destacado": false
+  },
+  {
+    "id": 73,
+    "nombre": "CALCOMANS DEPORTIVOS",
+    "descripcion": "Set 10 piezas",
+    "categoria": "carroceria",
+    "precio": 18.00,
+    "precio_anterior": 0,
+    "imagen": "https://shop.advanceautoparts.com/wcsstore/CVWEB/staticproductimage/N3057/large/10595410_ilu_6991_pri_larg.jpg",
+    "destacado": false
+  },
+  {
+    "id": 74,
+    "nombre": "PINTURA EN AEROSOL",
+    "descripcion": "Negro mate 400ml",
+    "categoria": "carroceria",
+    "precio": 12.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/ce/cf/a4/cecfa4e3315e847bfb5f6d2f61a3ad62.jpg",
+    "destacado": false
+  },
+  {
+    "id": 75,
+    "nombre": "MASCARA DELANTERA",
+    "descripcion": "Protección para autopista",
+    "categoria": "carroceria",
+    "precio": 65.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/f8/09/a9/f809a96a97ca7ba1602eb409d3addee3.jpg",
+    "destacado": false
+  },
+  {
+    "id": 76,
+    "nombre": "LLANTAS DEPORTIVAS",
+    "descripcion": "R17 225/45",
+    "categoria": "ruedas",
+    "precio": 450.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/94/fc/da/94fcda2b34d9acbb1f083a709eeb402d.jpg",
+    "destacado": false
+  },
+  {
+    "id": 77,
+    "nombre": "RINES DE ALEACIÓN",
+    "descripcion": "17 pulgadas 5 tornillos",
+    "categoria": "ruedas",
+    "precio": 380.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/03/b5/71/03b571ad4919e0f9a95652663fa52a0e.jpg",
+    "destacado": false
+  },
+  {
+    "id": 78,
+    "nombre": "TUERCAS DE SEGURIDAD",
+    "descripcion": "Juego 4 piezas cromadas",
+    "categoria": "ruedas",
+    "precio": 28.00,
+    "precio_anterior": 0,
+    "imagen": "https://shop.advanceautoparts.com/wcsstore/CVWEB/staticproductimage/1229/large/10211652_msd_85813_pri_larg.jpg",
+    "destacado": false
+  },
+  {
+    "id": 79,
+    "nombre": "KIT DE HIDRATACIÓN DE LLANTAS",
+    "descripcion": "Brillo duradero 500ml",
+    "categoria": "accesorios",
+    "precio": 15.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/2e/0c/ac/2e0cac70e71ef4d869a7ca77a546d2fc.jpg",
+    "destacado": false
+  },
+  {
+    "id": 80,
+    "nombre": "SELLADOR DE LLANTAS",
+    "descripcion": "Preventivo 500ml",
+    "categoria": "accesorios",
+    "precio": 18.00,
+    "precio_anterior": 0,
+    "imagen": "https://i.pinimg.com/236x/d9/6d/9d/d96d9d7eb4b34c47765af039c5435a9a.jpg",
+    "destacado": false
+  }
+]
