@@ -3,9 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito de Compras - Autoparts Store</title>
+    <title>Pago - Autoparts Store</title>
     <link rel="stylesheet" href="css/styles.css">
     <style>
+        .resumen_pedido {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .item_resumen {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #404040;
+        }
+        
+        .total_resumen {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ff4444;
+        }
+        
+        .metodo_pago {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .opcion_pago {
+            margin-bottom: 15px;
+        }
+        
+        .opcion_pago input {
+            margin-right: 10px;
+        }
+        
+        .opcion_pago label {
+            color: #e0e0e0;
+        }
+        
         .mensaje_sin_sesion {
             text-align: center;
             padding: 60px 20px;
@@ -14,14 +56,7 @@
             margin: 40px auto;
             max-width: 500px;
         }
-        .mensaje_sin_sesion h2 {
-            color: #ff4444;
-            margin-bottom: 20px;
-        }
-        .mensaje_sin_sesion p {
-            color: #b0b0b0;
-            margin-bottom: 30px;
-        }
+        
         .mensaje_carrito_vacio {
             text-align: center;
             padding: 60px 20px;
@@ -30,11 +65,7 @@
             margin: 40px auto;
             max-width: 500px;
         }
-        .mensaje_carrito_vacio p {
-            color: #b0b0b0;
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
+        
         .boton_redirigir {
             display: inline-block;
             background-color: #ff4444;
@@ -44,81 +75,20 @@
             border-radius: 5px;
             font-weight: bold;
             transition: background-color 0.2s;
-            margin-bottom: 15px;
         }
+        
         .boton_redirigir:hover {
             background-color: #cc3333;
         }
-        .boton_catalogo {
-            display: inline-block;
-            background-color: #404040;
-            color: white;
-            text-decoration: none;
-            padding: 12px 30px;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.2s;
-            margin-bottom: 15px;
-        }
-        .boton_catalogo:hover {
-            background-color: #ff4444;
-        }
+        
         .enlace_registro {
             text-align: center;
             margin-top: 20px;
         }
+        
         .enlace_registro a {
             color: #ff4444;
             text-decoration: none;
-        }
-        .enlace_registro a:hover {
-            text-decoration: underline;
-        }
-        .contenedor_carrito_productos {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .item_carrito {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #1a1a1a;
-            border-radius: 8px;
-        }
-        .imagen_carrito {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-        .info_carrito {
-            flex: 1;
-        }
-        .titulo_carrito {
-            color: #ff4444;
-            margin-bottom: 5px;
-        }
-        .descripcion_carrito {
-            color: #b0b0b0;
-            font-size: 0.9rem;
-        }
-        .precio_carrito {
-            color: #ff4444;
-            font-weight: bold;
-        }
-        .boton_eliminar {
-            background-color: #404040;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .boton_eliminar:hover {
-            background-color: #ff4444;
         }
     </style>
 </head>
@@ -151,9 +121,8 @@
     </header>
 
     <div class="contenedor_formulario" id="contenedor_principal">
-        <h1 class="titulo_formulario">CARRITO DE COMPRAS</h1>
-        
-        <div id="contenido_carrito"></div>
+        <h1 class="titulo_formulario">FINALIZAR COMPRA</h1>
+        <div id="contenido_pago"></div>
     </div>
 
     <footer class="footer_pagina">
@@ -198,6 +167,9 @@
 
     <script src="backend/main.js"></script>
     <script>
+        let items_carrito = [];
+        let total_pagar = 0;
+
         function obtener_usuario_actual()
         {
             const usuario = sessionStorage.getItem('usuario');
@@ -206,12 +178,12 @@
 
         function mostrar_sin_sesion()
         {
-            const contenedor = document.getElementById('contenido_carrito');
+            const contenedor = document.getElementById('contenido_pago');
             
             contenedor.innerHTML = `
                 <div class="mensaje_sin_sesion">
                     <h2>🔒 SESIÓN NO INICIADA</h2>
-                    <p>Debes iniciar sesión para ver tu carrito de compras</p>
+                    <p>Debes iniciar sesión para continuar con el pago</p>
                     <a href="inicio_sesion.html" class="boton_redirigir">INICIAR SESIÓN</a>
                     <div class="enlace_registro">
                         <a href="registro.html">¿No tienes cuenta? Regístrate aquí</a>
@@ -220,7 +192,19 @@
             `;
         }
 
-        function cargar_carrito()
+        function mostrar_carrito_vacio()
+        {
+            const contenedor = document.getElementById('contenido_pago');
+            
+            contenedor.innerHTML = `
+                <div class="mensaje_carrito_vacio">
+                    <p>🛒 Tu carrito está vacío</p>
+                    <a href="catalogo.html" class="boton_redirigir">IR AL CATÁLOGO</a>
+                </div>
+            `;
+        }
+
+        function cargar_pago()
         {
             const usuario = obtener_usuario_actual();
             
@@ -230,24 +214,13 @@
                 return;
             }
             
-            const contenedor = document.getElementById('contenido_carrito');
-            contenedor.innerHTML = `<p style="text-align:center; color:#b0b0b0;">Cargando carrito...</p>`;
-            
             fetch(`/api/carrito/${usuario.id}`)
                 .then(response => response.json())
                 .then(carrito =>
                 {
                     if (carrito.length === 0)
                     {
-                        contenedor.innerHTML = `
-                            <div class="mensaje_carrito_vacio">
-                                <p>🛒 Tu carrito está vacío</p>
-                                <a href="catalogo.html" class="boton_catalogo">IR AL CATÁLOGO</a>
-                                <div class="enlace_registro">
-                                    <a href="registro.html">¿No tienes cuenta? Regístrate aquí</a>
-                                </div>
-                            </div>
-                        `;
+                        mostrar_carrito_vacio();
                         return;
                     }
                     
@@ -255,8 +228,9 @@
                         .then(response => response.json())
                         .then(productos =>
                         {
-                            let total = 0;
-                            let html = '<div class="contenedor_carrito_productos">';
+                            items_carrito = [];
+                            total_pagar = 0;
+                            let resumen_html = '<div class="resumen_pedido"><h3 style="color: #ff4444; margin-bottom: 15px;">RESUMEN DEL PEDIDO</h3>';
                             
                             carrito.forEach(item =>
                             {
@@ -264,113 +238,127 @@
                                 
                                 if (producto)
                                 {
-                                    total += producto.precio;
+                                    items_carrito.push({
+                                        id: producto.id,
+                                        nombre: producto.nombre,
+                                        precio: producto.precio,
+                                        cantidad: 1
+                                    });
                                     
-                                    html += `
-                                        <div class="item_carrito">
-                                            <img src="${producto.imagen}" alt="${producto.nombre}" class="imagen_carrito" onerror="this.src='https://via.placeholder.com/80x80?text=Sin+imagen'">
-                                            <div class="info_carrito">
-                                                <h3 class="titulo_carrito">${producto.nombre}</h3>
-                                                <p class="descripcion_carrito">${producto.descripcion}</p>
-                                                <span class="precio_carrito">$${producto.precio.toFixed(2)}</span>
-                                            </div>
-                                            <button class="boton_eliminar" data-id="${producto.id}">ELIMINAR</button>
+                                    total_pagar += producto.precio;
+                                    
+                                    resumen_html += `
+                                        <div class="item_resumen">
+                                            <span>${producto.nombre}</span>
+                                            <span>$${producto.precio.toFixed(2)}</span>
                                         </div>
                                     `;
                                 }
                             });
                             
-                            html += `
+                            resumen_html += `
+                                <div class="total_resumen">
+                                    <span>TOTAL:</span>
+                                    <span>$${total_pagar.toFixed(2)}</span>
                                 </div>
-                                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #404040;">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px; color: #e0e0e0;">
-                                        <span>Total:</span>
-                                        <span style="color: #ff4444; font-size: 1.5rem; font-weight: bold;">$${total.toFixed(2)}</span>
+                            </div>`;
+                            
+                            const direccion_envio = usuario.direccion || 'No especificada';
+                            
+                            const pago_html = `
+                                ${resumen_html}
+                                <div class="metodo_pago">
+                                    <h3 style="color: #ff4444; margin-bottom: 15px;">MÉTODO DE PAGO</h3>
+                                    <div class="opcion_pago">
+                                        <input type="radio" id="tarjeta" name="metodo_pago" value="tarjeta" checked>
+                                        <label for="tarjeta">💳 Tarjeta de crédito/débito</label>
                                     </div>
-                                    <button class="boton_formulario" onclick="window.location.href='pago.html'">CONTINUAR CON EL PAGO</button>
-                                    <button class="boton_formulario" onclick="vaciar_carrito()" style="background-color: #404040;">VACIAR CARRITO</button>
+                                    <div class="opcion_pago">
+                                        <input type="radio" id="transferencia" name="metodo_pago" value="transferencia">
+                                        <label for="transferencia">🏦 Transferencia bancaria</label>
+                                    </div>
+                                    <div class="opcion_pago">
+                                        <input type="radio" id="paypal" name="metodo_pago" value="paypal">
+                                        <label for="paypal">💰 PayPal</label>
+                                    </div>
                                 </div>
+                                <div class="resumen_pedido">
+                                    <h3 style="color: #ff4444; margin-bottom: 15px;">DIRECCIÓN DE ENVÍO</h3>
+                                    <p style="color: #b0b0b0;">${direccion_envio}</p>
+                                    <p style="color: #b0b0b0; margin-top: 10px; font-size: 0.9rem;">
+                                        <a href="editar_perfil.html" style="color: #ff4444;">Cambiar dirección</a>
+                                    </p>
+                                </div>
+                                <button class="boton_formulario" onclick="realizar_pago()">PAGAR $${total_pagar.toFixed(2)}</button>
+                                <button class="boton_formulario" onclick="window.location.href='carrito.html'" style="background-color: #404040;">VOLVER AL CARRITO</button>
                             `;
                             
-                            contenedor.innerHTML = html;
-                            
-                            document.querySelectorAll('.boton_eliminar').forEach(boton =>
-                            {
-                                boton.onclick = function(e)
-                                {
-                                    e.preventDefault();
-                                    eliminar_producto_carrito(this.getAttribute('data-id'));
-                                };
-                            });
-                        })
-                        .catch(error => console.error('Error:', error));
+                            document.getElementById('contenido_pago').innerHTML = pago_html;
+                        });
                 })
-                .catch(error => console.error('Error al cargar carrito:', error));
+                .catch(error => console.error('Error:', error));
         }
 
-        function eliminar_producto_carrito(id_producto)
+        function realizar_pago()
         {
             const usuario = obtener_usuario_actual();
             
-            if (!usuario) return;
+            if (!usuario || items_carrito.length === 0)
+            {
+                alert('No hay productos en el carrito');
+                return;
+            }
             
-            fetch('/api/eliminar-carrito', {
+            const metodo_pago = document.querySelector('input[name="metodo_pago"]:checked');
+            
+            if (!metodo_pago)
+            {
+                alert('Selecciona un método de pago');
+                return;
+            }
+            
+            const direccion_envio = usuario.direccion;
+            
+            if (!direccion_envio)
+            {
+                alert('Debes tener una dirección registrada para realizar el pedido. Por favor, edita tu perfil.');
+                window.location.href = 'editar_perfil.html';
+                return;
+            }
+            
+            const datos_pedido = {
+                id_usuario: usuario.id,
+                items: items_carrito,
+                total: total_pagar,
+                direccion: direccion_envio
+            };
+            
+            fetch('/api/realizar-pedido', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    id_usuario: usuario.id,
-                    id_producto: parseInt(id_producto)
-                })
+                body: JSON.stringify(datos_pedido)
             })
             .then(response => response.json())
             .then(data =>
             {
                 if (data.exito)
                 {
+                    alert('¡Pago realizado con éxito! Tu pedido ha sido registrado.');
                     actualizar_contador_carrito();
-                    cargar_carrito();
+                    window.location.href = 'pedidos.html';
                 }
                 else
                 {
-                    alert('Error al eliminar producto: ' + (data.mensaje || 'Error desconocido'));
+                    alert('Error al realizar el pedido: ' + (data.mensaje || 'Error desconocido'));
                 }
             })
-            .catch(error => console.error('Error:', error));
-        }
-
-        function vaciar_carrito()
-        {
-            const usuario = obtener_usuario_actual();
-            
-            if (!usuario) return;
-            
-            if (!confirm('¿Estás seguro de que quieres vaciar todo el carrito?')) return;
-            
-            fetch('/api/vaciar-carrito', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    id_usuario: usuario.id
-                })
-            })
-            .then(response => response.json())
-            .then(data =>
+            .catch(error =>
             {
-                if (data.exito)
-                {
-                    actualizar_contador_carrito();
-                    cargar_carrito();
-                }
-                else
-                {
-                    alert('Error al vaciar el carrito: ' + (data.mensaje || 'Error desconocido'));
-                }
-            })
-            .catch(error => console.error('Error:', error));
+                console.error('Error:', error);
+                alert('Error de conexión al servidor');
+            });
         }
 
         function actualizar_enlace_sesion()
@@ -395,7 +383,7 @@
         {
             actualizar_enlace_sesion();
             actualizar_contador_carrito();
-            cargar_carrito();
+            cargar_pago();
         });
     </script>
 </body>

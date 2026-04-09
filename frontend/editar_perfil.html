@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro - Autoparts Store</title>
+    <title>Editar Perfil - Autoparts Store</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -19,7 +19,7 @@
                 <li class="item_menu"><a href="ofertas.html" class="enlace_menu">OFERTAS</a></li>
                 <li class="item_menu"><a href="contacto.html" class="enlace_menu">CONTACTO</a></li>
                 <li class="item_menu"><a href="pedidos.html" class="enlace_menu">MIS PEDIDOS</a></li>
-                <li class="item_menu"><a href="perfil.html" class="enlace_menu" id="enlace_sesion">MI PERFIL</a></li>
+                <li class="item_menu"><a href="perfil.html" class="enlace_menu activo">MI PERFIL</a></li>
             </ul>
         </nav>
 
@@ -35,11 +35,12 @@
     </header>
 
     <div class="contenedor_formulario">
-        <h1 class="titulo_formulario">REGISTRO DE USUARIO</h1>
+        <h1 class="titulo_formulario">EDITAR PERFIL</h1>
         
         <div id="mensaje_error" class="mensaje_error" style="display: none;"></div>
+        <div id="mensaje_exito" class="mensaje_exito" style="display: none;"></div>
         
-        <form method="POST" action="/registro">
+        <form id="formulario_editar_perfil">
             <div class="campo_formulario">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>
@@ -71,15 +72,12 @@
             </div>
 
             <div class="campo_formulario">
-                <label for="contrasena">Contraseña:</label>
-                <input type="password" id="contrasena" name="contrasena" required>
+                <label for="contrasena">Nueva contraseña (dejar en blanco para no cambiar):</label>
+                <input type="password" id="contrasena" name="contrasena">
             </div>
 
-            <button type="submit" class="boton_formulario">REGISTRARSE</button>
-
-            <div class="enlace_formulario">
-                <a href="inicio_sesion.html">¿Ya tienes cuenta? Inicia sesión aquí</a>
-            </div>
+            <button type="submit" class="boton_formulario">GUARDAR CAMBIOS</button>
+            <button type="button" class="boton_formulario" onclick="window.location.href='perfil.html'" style="background-color: #404040; margin-top: 10px;">CANCELAR</button>
         </form>
     </div>
 
@@ -125,9 +123,121 @@
 
     <script src="backend/main.js"></script>
     <script>
-        function actualizar_enlace_sesion()
+        function obtener_usuario_actual()
         {
             const usuario = sessionStorage.getItem('usuario');
+            return usuario ? JSON.parse(usuario) : null;
+        }
+
+        function mostrar_error(mensaje)
+        {
+            const error_div = document.getElementById('mensaje_error');
+            error_div.textContent = mensaje;
+            error_div.style.display = 'block';
+            
+            setTimeout(() =>
+            {
+                error_div.style.display = 'none';
+            }, 3000);
+        }
+
+        function mostrar_exito(mensaje)
+        {
+            const exito_div = document.getElementById('mensaje_exito');
+            exito_div.textContent = mensaje;
+            exito_div.style.display = 'block';
+            
+            setTimeout(() =>
+            {
+                exito_div.style.display = 'none';
+            }, 3000);
+        }
+
+        function cargar_datos_usuario()
+        {
+            const usuario = obtener_usuario_actual();
+            
+            if (!usuario)
+            {
+                window.location.href = 'inicio_sesion.html';
+                return;
+            }
+            
+            document.getElementById('nombre').value = usuario.nombre || '';
+            document.getElementById('apellido_paterno').value = usuario.apellido_paterno || '';
+            document.getElementById('apellido_materno').value = usuario.apellido_materno || '';
+            document.getElementById('telefono').value = usuario.telefono || '';
+            document.getElementById('direccion').value = usuario.direccion || '';
+            document.getElementById('correo').value = usuario.correo || '';
+        }
+
+        function manejar_envio_formulario(evento)
+        {
+            evento.preventDefault();
+            
+            const usuario = obtener_usuario_actual();
+            
+            if (!usuario)
+            {
+                window.location.href = 'inicio_sesion.html';
+                return;
+            }
+            
+            const datos_formulario = {
+                id_usuario: usuario.id,
+                nombre: document.getElementById('nombre').value,
+                apellido_paterno: document.getElementById('apellido_paterno').value,
+                apellido_materno: document.getElementById('apellido_materno').value,
+                telefono: document.getElementById('telefono').value,
+                direccion: document.getElementById('direccion').value,
+                correo: document.getElementById('correo').value,
+                contrasena: document.getElementById('contrasena').value
+            };
+            
+            fetch('/api/actualizar-perfil', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datos_formulario)
+            })
+            .then(response => response.json())
+            .then(data =>
+            {
+                if (data.exito)
+                {
+                    const usuario_actualizado = {
+                        ...usuario,
+                        nombre: datos_formulario.nombre,
+                        apellido_paterno: datos_formulario.apellido_paterno,
+                        apellido_materno: datos_formulario.apellido_materno,
+                        telefono: datos_formulario.telefono,
+                        direccion: datos_formulario.direccion,
+                        correo: datos_formulario.correo
+                    };
+                    
+                    sessionStorage.setItem('usuario', JSON.stringify(usuario_actualizado));
+                    mostrar_exito(data.mensaje);
+                    
+                    setTimeout(() =>
+                    {
+                        window.location.href = 'perfil.html';
+                    }, 1500);
+                }
+                else
+                {
+                    mostrar_error(data.mensaje);
+                }
+            })
+            .catch(error =>
+            {
+                mostrar_error('Error al actualizar el perfil');
+            });
+        }
+
+        function actualizar_enlace_sesion()
+        {
+            const usuario = obtener_usuario_actual();
 
             if (usuario)
             {
@@ -143,16 +253,13 @@
             }
         }
 
-        const url_params = new URLSearchParams(window.location.search);
-        
-        if (url_params.get('error') === '1')
+        document.addEventListener('DOMContentLoaded', () =>
         {
-            const mensaje_error = document.getElementById('mensaje_error');
-            mensaje_error.textContent = 'Error al registrar usuario. El correo puede estar duplicado.';
-            mensaje_error.style.display = 'block';
-        }
-
-        document.addEventListener('DOMContentLoaded', actualizar_enlace_sesion);
+            actualizar_enlace_sesion();
+            cargar_datos_usuario();
+            actualizar_contador_carrito();
+            document.getElementById('formulario_editar_perfil').addEventListener('submit', manejar_envio_formulario);
+        });
     </script>
 </body>
 </html>

@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- BARRA DE NAVEGACIÓN -->
     <header class="header_navegacion">
         <div class="contenedor_logo">
             <span class="logo_texto">AUTOPARTS STORE</span>
@@ -19,7 +18,8 @@
                 <li class="item_menu"><a href="catalogo.html" class="enlace_menu">CATÁLOGO</a></li>
                 <li class="item_menu"><a href="ofertas.html" class="enlace_menu">OFERTAS</a></li>
                 <li class="item_menu"><a href="contacto.html" class="enlace_menu">CONTACTO</a></li>
-                <li class="item_menu"><a href="inicio_sesion.html" class="enlace_menu" id="enlace_sesion">INICIAR SESIÓN</a></li>
+                <li class="item_menu"><a href="pedidos.html" class="enlace_menu">MIS PEDIDOS</a></li>
+                <li class="item_menu"><a href="perfil.html" class="enlace_menu" id="enlace_sesion">MI PERFIL</a></li>
             </ul>
         </nav>
 
@@ -34,7 +34,6 @@
         </div>
     </header>
 
-    <!-- HERO SECTION -->
     <section id="inicio" class="seccion_hero">
         <div class="contenedor_hero">
             <h1 class="titulo_hero">ENCUENTRA LAS MEJORES AUTOPARTES</h1>
@@ -43,7 +42,6 @@
         </div>
     </section>
 
-    <!-- CATEGORÍAS DESTACADAS -->
     <section class="seccion_categorias">
         <div class="contenedor_titulo_seccion">
             <h2 class="titulo_seccion">CATEGORÍAS DESTACADAS</h2>
@@ -80,18 +78,15 @@
         </div>
     </section>
 
-    <!-- PRODUCTOS DESTACADOS -->
     <section class="seccion_productos">
         <div class="contenedor_titulo_seccion">
             <h2 class="titulo_seccion">PRODUCTOS DESTACADOS</h2>
         </div>
 
         <div class="contenedor_grid_productos">
-            <!-- Se carga dinámicamente con JavaScript -->
         </div>
     </section>
 
-    <!-- OFERTAS ESPECIALES -->
     <section id="ofertas" class="seccion_ofertas">
         <div class="contenedor_oferta">
             <h2 class="titulo_oferta">OFERTAS ESPECIALES</h2>
@@ -100,7 +95,6 @@
         </div>
     </section>
 
-    <!-- PIE DE PÁGINA -->
     <footer id="contacto" class="footer_pagina">
         <div class="contenedor_footer">
             <div class="columna_footer">
@@ -149,11 +143,15 @@
 
             if (usuario)
             {
-                const datos_usuario = JSON.parse(usuario);
                 const enlace_sesion = document.getElementById('enlace_sesion');
-
                 enlace_sesion.textContent = 'MI PERFIL';
                 enlace_sesion.href = 'perfil.html';
+            }
+            else
+            {
+                const enlace_sesion = document.getElementById('enlace_sesion');
+                enlace_sesion.textContent = 'INICIAR SESIÓN';
+                enlace_sesion.href = 'inicio_sesion.html';
             }
         }
 

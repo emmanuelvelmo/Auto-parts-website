@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- BARRA DE NAVEGACIÓN -->
     <header class="header_navegacion">
         <div class="contenedor_logo">
             <span class="logo_texto">AUTOPARTS STORE</span>
@@ -19,7 +18,8 @@
                 <li class="item_menu"><a href="catalogo.html" class="enlace_menu">CATÁLOGO</a></li>
                 <li class="item_menu"><a href="ofertas.html" class="enlace_menu">OFERTAS</a></li>
                 <li class="item_menu"><a href="contacto.html" class="enlace_menu">CONTACTO</a></li>
-                <li class="item_menu"><a href="inicio_sesion.html" class="enlace_menu" id="enlace_sesion">INICIAR SESIÓN</a></li>
+                <li class="item_menu"><a href="pedidos.html" class="enlace_menu">MIS PEDIDOS</a></li>
+                <li class="item_menu"><a href="perfil.html" class="enlace_menu" id="enlace_sesion">MI PERFIL</a></li>
             </ul>
         </nav>
 
@@ -34,7 +34,6 @@
         </div>
     </header>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <div class="contenedor_formulario">
         <h1 class="titulo_formulario">TÉRMINOS Y CONDICIONES</h1>
         
@@ -62,7 +61,6 @@
         </div>
     </div>
 
-    <!-- PIE DE PÁGINA -->
     <footer class="footer_pagina">
         <div class="contenedor_footer">
             <div class="columna_footer">
@@ -111,11 +109,15 @@
 
             if (usuario)
             {
-                const datos_usuario = JSON.parse(usuario);
                 const enlace_sesion = document.getElementById('enlace_sesion');
-
                 enlace_sesion.textContent = 'MI PERFIL';
                 enlace_sesion.href = 'perfil.html';
+            }
+            else
+            {
+                const enlace_sesion = document.getElementById('enlace_sesion');
+                enlace_sesion.textContent = 'INICIAR SESIÓN';
+                enlace_sesion.href = 'inicio_sesion.html';
             }
         }
 

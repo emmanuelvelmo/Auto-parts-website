@@ -174,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () =>
 {
     const pathname = window.location.pathname;
     
-    // Solo cargar productos destacados en la página de inicio
     if (pathname.includes('inicio.html') || pathname === '/' || pathname === '/frontend/inicio.html')
     {
         fetch('/api/productos')
@@ -188,7 +187,6 @@ document.addEventListener('DOMContentLoaded', () =>
     }
     else
     {
-        // Para otras páginas, solo guardar productos en localStorage sin mostrarlos
         fetch('/api/productos')
             .then(response => response.json())
             .then(productos =>

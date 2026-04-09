@@ -25,7 +25,6 @@ function manejar_peticion_post(peticion, respuesta, ruta_parseada)
         console.log('Ruta completa:', ruta_parseada.pathname);
         console.log('Cuerpo recibido:', cuerpo);
         
-        // Intentar parsear como JSON primero
         let datos_json = null;
         let es_json = false;
         
@@ -40,7 +39,6 @@ function manejar_peticion_post(peticion, respuesta, ruta_parseada)
             console.log('No es JSON, procesando como URLSearchParams');
         }
         
-        // Manejar diferentes rutas POST
         if (ruta_parseada.pathname === '/registro')
         {
             const parametros = new URLSearchParams(cuerpo);
@@ -84,7 +82,107 @@ function manejar_peticion_post(peticion, respuesta, ruta_parseada)
             return;
         }
         
-        // Manejar rutas API POST
+        if (ruta_parseada.pathname === '/api/actualizar-perfil')
+        {
+            respuesta.setHeader('Content-Type', 'application/json');
+            
+            try
+            {
+                let id_usuario_val = null;
+                let datos_actualizar = {};
+                
+                if (es_json && datos_json)
+                {
+                    id_usuario_val = datos_json.id_usuario;
+                    datos_actualizar = {
+                        nombre: datos_json.nombre,
+                        apellido_paterno: datos_json.apellido_paterno,
+                        apellido_materno: datos_json.apellido_materno,
+                        telefono: datos_json.telefono,
+                        direccion: datos_json.direccion,
+                        correo: datos_json.correo,
+                        contrasena: datos_json.contrasena
+                    };
+                }
+                else
+                {
+                    const parametros = new URLSearchParams(cuerpo);
+                    id_usuario_val = parseInt(parametros.get('id_usuario'));
+                    datos_actualizar = {
+                        nombre: parametros.get('nombre'),
+                        apellido_paterno: parametros.get('apellido_paterno'),
+                        apellido_materno: parametros.get('apellido_materno'),
+                        telefono: parametros.get('telefono'),
+                        direccion: parametros.get('direccion'),
+                        correo: parametros.get('correo'),
+                        contrasena: parametros.get('contrasena')
+                    };
+                }
+                
+                if (!id_usuario_val)
+                {
+                    respuesta.statusCode = 400;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Falta ID de usuario' }));
+                    return;
+                }
+                
+                const resultado = database.actualizar_usuario(id_usuario_val, datos_actualizar);
+                respuesta.end(JSON.stringify(resultado));
+            }
+            catch (error)
+            {
+                console.error('Error en actualizar-perfil:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al actualizar perfil' }));
+            }
+            return;
+        }
+        
+        if (ruta_parseada.pathname === '/api/agregar-producto')
+        {
+            respuesta.setHeader('Content-Type', 'application/json');
+            
+            try
+            {
+                let datos_producto = {};
+                
+                if (es_json && datos_json)
+                {
+                    datos_producto = datos_json;
+                }
+                else
+                {
+                    const parametros = new URLSearchParams(cuerpo);
+                    datos_producto = {
+                        nombre: parametros.get('nombre'),
+                        descripcion: parametros.get('descripcion'),
+                        categoria: parametros.get('categoria'),
+                        precio: parametros.get('precio'),
+                        precio_anterior: parametros.get('precio_anterior'),
+                        imagen: parametros.get('imagen'),
+                        destacado: parametros.get('destacado')
+                    };
+                }
+                
+                if (!datos_producto.nombre || !datos_producto.precio)
+                {
+                    respuesta.statusCode = 400;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Faltan datos requeridos del producto' }));
+                    return;
+                }
+                
+                const resultado = database.agregar_producto_nuevo(datos_producto);
+                respuesta.end(JSON.stringify(resultado));
+            }
+            catch (error)
+            {
+                console.error('Error en agregar-producto:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al agregar producto' }));
+            }
+            return;
+        }
+        
         if (ruta_parseada.pathname === '/api/agregar-carrito')
         {
             console.log('=== MANEJANDO /api/agregar-carrito ===');
@@ -209,7 +307,89 @@ function manejar_peticion_post(peticion, respuesta, ruta_parseada)
             return;
         }
         
-        // Si llegamos aquí, la ruta POST no existe
+        if (ruta_parseada.pathname === '/api/realizar-pedido')
+        {
+            respuesta.setHeader('Content-Type', 'application/json');
+            
+            try
+            {
+                let id_usuario_val = null;
+                let items_val = null;
+                let total_val = null;
+                let direccion_val = null;
+                
+                if (es_json && datos_json)
+                {
+                    id_usuario_val = datos_json.id_usuario;
+                    items_val = datos_json.items;
+                    total_val = datos_json.total;
+                    direccion_val = datos_json.direccion;
+                }
+                else
+                {
+                    const parametros = new URLSearchParams(cuerpo);
+                    id_usuario_val = parseInt(parametros.get('id_usuario'));
+                    items_val = JSON.parse(parametros.get('items') || '[]');
+                    total_val = parseFloat(parametros.get('total'));
+                    direccion_val = parametros.get('direccion');
+                }
+                
+                if (!id_usuario_val || !items_val || items_val.length === 0)
+                {
+                    respuesta.statusCode = 400;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Faltan datos del pedido' }));
+                    return;
+                }
+                
+                const resultado = database.crear_pedido(id_usuario_val, items_val, total_val, direccion_val);
+                respuesta.end(JSON.stringify(resultado));
+            }
+            catch (error)
+            {
+                console.error('Error en realizar-pedido:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al realizar el pedido' }));
+            }
+            return;
+        }
+        
+        if (ruta_parseada.pathname === '/api/eliminar-pedido')
+        {
+            respuesta.setHeader('Content-Type', 'application/json');
+            
+            try
+            {
+                let id_pedido_val = null;
+                
+                if (es_json && datos_json)
+                {
+                    id_pedido_val = datos_json.id_pedido;
+                }
+                else
+                {
+                    const parametros = new URLSearchParams(cuerpo);
+                    id_pedido_val = parseInt(parametros.get('id_pedido'));
+                }
+                
+                if (!id_pedido_val)
+                {
+                    respuesta.statusCode = 400;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Falta ID del pedido' }));
+                    return;
+                }
+                
+                const resultado = database.eliminar_pedido_entregado(id_pedido_val);
+                respuesta.end(JSON.stringify({ exito: resultado, mensaje: resultado ? 'Pedido eliminado' : 'No se pudo eliminar el pedido' }));
+            }
+            catch (error)
+            {
+                console.error('Error en eliminar-pedido:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al eliminar el pedido' }));
+            }
+            return;
+        }
+        
         console.log('Ruta POST no encontrada:', ruta_parseada.pathname);
         respuesta.statusCode = 404;
         respuesta.setHeader('Content-Type', 'application/json');
@@ -303,22 +483,32 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada)
         return;
     }
     
-    if (pathname === '/api/carrito' && metodo === 'DELETE')
+    if (pathname.startsWith('/api/pedidos/') && metodo === 'GET')
     {
         try
         {
-            database.escribir_carrito([]);
-            respuesta.end(JSON.stringify({ exito: true, mensaje: 'Carrito vaciado' }));
+            const partes = pathname.split('/');
+            const id_usuario = parseInt(partes[partes.length - 1]);
+            
+            if (isNaN(id_usuario))
+            {
+                respuesta.statusCode = 400;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'ID de usuario inválido' }));
+                return;
+            }
+            
+            const pedidos = database.obtener_pedidos_usuario(id_usuario);
+            respuesta.end(JSON.stringify(pedidos));
         }
         catch (error)
         {
+            console.error('Error al obtener pedidos:', error);
             respuesta.statusCode = 500;
-            respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al vaciar el carrito' }));
+            respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al obtener los pedidos' }));
         }
         return;
     }
     
-    // Si llegamos aquí, la ruta API no existe
     console.log('API ruta no encontrada:', metodo, pathname);
     respuesta.statusCode = 404;
     respuesta.end(JSON.stringify({ exito: false, mensaje: 'Ruta API no encontrada' }));
@@ -366,7 +556,10 @@ function es_ruta_html_frontend(ruta)
         '/inicio_sesion.html',
         '/registro.html',
         '/perfil.html',
+        '/editar_perfil.html',
         '/carrito.html',
+        '/pago.html',
+        '/pedidos.html',
         '/catalogo.html',
         '/ofertas.html',
         '/acerca_de_nosotros.html',
@@ -389,21 +582,18 @@ const servidor = http.createServer((peticion, respuesta) =>
     console.log('Ruta:', ruta_archivo);
     console.log('Headers:', peticion.headers);
 
-    // Manejar todas las peticiones POST
     if (peticion.method === 'POST')
     {
         manejar_peticion_post(peticion, respuesta, ruta_parseada);
         return;
     }
 
-    // Manejar peticiones GET a rutas API
     if (ruta_archivo.startsWith('/api/'))
     {
         manejar_peticion_api(peticion, respuesta, ruta_parseada);
         return;
     }
 
-    // Manejar archivos estáticos (GET)
     if (ruta_archivo === '/')
     {
         ruta_archivo = '/frontend/inicio.html';

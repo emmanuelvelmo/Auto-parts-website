@@ -63,10 +63,47 @@
         .campo_perfil p {
             color: #e0e0e0;
         }
+        .boton_secundario {
+            width: 100%;
+            padding: 14px;
+            background-color: #404040;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+        .boton_secundario:hover {
+            background-color: #ff4444;
+        }
+        .boton_pedidos {
+            background-color: #0066cc;
+        }
+        .boton_pedidos:hover {
+            background-color: #0052a3;
+        }
+        .boton_agregar_producto {
+            background-color: #228822;
+        }
+        .boton_agregar_producto:hover {
+            background-color: #1a6e1a;
+        }
+        .formulario_agregar {
+            background-color: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+        .formulario_agregar.mostrar {
+            display: block;
+        }
     </style>
 </head>
 <body>
-    <!-- BARRA DE NAVEGACIÓN -->
     <header class="header_navegacion">
         <div class="contenedor_logo">
             <span class="logo_texto">AUTOPARTS STORE</span>
@@ -78,6 +115,7 @@
                 <li class="item_menu"><a href="catalogo.html" class="enlace_menu">CATÁLOGO</a></li>
                 <li class="item_menu"><a href="ofertas.html" class="enlace_menu">OFERTAS</a></li>
                 <li class="item_menu"><a href="contacto.html" class="enlace_menu">CONTACTO</a></li>
+                <li class="item_menu"><a href="pedidos.html" class="enlace_menu">MIS PEDIDOS</a></li>
                 <li class="item_menu"><a href="perfil.html" class="enlace_menu activo" id="enlace_sesion">MI PERFIL</a></li>
             </ul>
         </nav>
@@ -93,14 +131,63 @@
         </div>
     </header>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <div class="contenedor_formulario" id="contenedor_principal">
         <h1 class="titulo_formulario">MI PERFIL</h1>
         
         <div id="contenido_perfil"></div>
+        
+        <div id="formulario_agregar" class="formulario_agregar">
+            <h3 style="color: #ff4444; margin-bottom: 15px;">AGREGAR NUEVO PRODUCTO</h3>
+            <div id="mensaje_producto" class="mensaje_error" style="display: none;"></div>
+            
+            <div class="campo_formulario">
+                <label for="prod_nombre">Nombre del producto:</label>
+                <input type="text" id="prod_nombre" required>
+            </div>
+            
+            <div class="campo_formulario">
+                <label for="prod_descripcion">Descripción:</label>
+                <input type="text" id="prod_descripcion" required>
+            </div>
+            
+            <div class="campo_formulario">
+                <label for="prod_categoria">Categoría:</label>
+                <select id="prod_categoria" style="width: 100%; padding: 12px; background-color: #1a1a1a; border: 1px solid #404040; border-radius: 5px; color: #e0e0e0;">
+                    <option value="motor">Motor</option>
+                    <option value="frenos">Frenos</option>
+                    <option value="suspension">Suspensión</option>
+                    <option value="electrico">Eléctrico</option>
+                    <option value="carroceria">Carrocería</option>
+                    <option value="accesorios">Accesorios</option>
+                </select>
+            </div>
+            
+            <div class="campo_formulario">
+                <label for="prod_precio">Precio ($):</label>
+                <input type="number" id="prod_precio" step="0.01" required>
+            </div>
+            
+            <div class="campo_formulario">
+                <label for="prod_precio_anterior">Precio anterior ($):</label>
+                <input type="number" id="prod_precio_anterior" step="0.01" value="0">
+            </div>
+            
+            <div class="campo_formulario">
+                <label for="prod_imagen">URL de la imagen:</label>
+                <input type="text" id="prod_imagen" placeholder="https://ejemplo.com/imagen.jpg">
+            </div>
+            
+            <div class="campo_formulario">
+                <label>
+                    <input type="checkbox" id="prod_destacado"> Marcar como destacado
+                </label>
+            </div>
+            
+            <button class="boton_formulario" onclick="agregar_producto()">AGREGAR PRODUCTO</button>
+            <button class="boton_secundario" onclick="toggle_formulario_agregar()">CANCELAR</button>
+        </div>
     </div>
 
-    <!-- PIE DE PÁGINA -->
     <footer class="footer_pagina">
         <div class="contenedor_footer">
             <div class="columna_footer">
@@ -159,6 +246,94 @@
             `;
         }
 
+        function toggle_formulario_agregar()
+        {
+            const formulario = document.getElementById('formulario_agregar');
+            formulario.classList.toggle('mostrar');
+            
+            if (!formulario.classList.contains('mostrar'))
+            {
+                document.getElementById('prod_nombre').value = '';
+                document.getElementById('prod_descripcion').value = '';
+                document.getElementById('prod_precio').value = '';
+                document.getElementById('prod_precio_anterior').value = '0';
+                document.getElementById('prod_imagen').value = '';
+                document.getElementById('prod_destacado').checked = false;
+            }
+        }
+
+        function mostrar_mensaje_producto(mensaje, es_error = true)
+        {
+            const msg_div = document.getElementById('mensaje_producto');
+            msg_div.textContent = mensaje;
+            msg_div.style.display = 'block';
+            msg_div.className = es_error ? 'mensaje_error' : 'mensaje_exito';
+            
+            setTimeout(() =>
+            {
+                msg_div.style.display = 'none';
+            }, 3000);
+        }
+
+        function agregar_producto()
+        {
+            const nombre = document.getElementById('prod_nombre').value.trim();
+            const descripcion = document.getElementById('prod_descripcion').value.trim();
+            const categoria = document.getElementById('prod_categoria').value;
+            const precio = parseFloat(document.getElementById('prod_precio').value);
+            const precio_anterior = parseFloat(document.getElementById('prod_precio_anterior').value) || 0;
+            const imagen = document.getElementById('prod_imagen').value.trim() || 'https://via.placeholder.com/236x200?text=Auto+part';
+            const destacado = document.getElementById('prod_destacado').checked;
+            
+            if (!nombre || !descripcion || isNaN(precio) || precio <= 0)
+            {
+                mostrar_mensaje_producto('Por favor, completa todos los campos requeridos correctamente');
+                return;
+            }
+            
+            const datos_producto = {
+                nombre: nombre,
+                descripcion: descripcion,
+                categoria: categoria,
+                precio: precio,
+                precio_anterior: precio_anterior,
+                imagen: imagen,
+                destacado: destacado
+            };
+            
+            fetch('/api/agregar-producto', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datos_producto)
+            })
+            .then(response => response.json())
+            .then(data =>
+            {
+                if (data.exito)
+                {
+                    mostrar_mensaje_producto('Producto agregado exitosamente', false);
+                    toggle_formulario_agregar();
+                    
+                    fetch('/api/productos')
+                        .then(response => response.json())
+                        .then(productos =>
+                        {
+                            localStorage.setItem('productos', JSON.stringify(productos));
+                        });
+                }
+                else
+                {
+                    mostrar_mensaje_producto(data.mensaje || 'Error al agregar producto');
+                }
+            })
+            .catch(error =>
+            {
+                mostrar_mensaje_producto('Error de conexión al servidor');
+            });
+        }
+
         function mostrar_perfil()
         {
             const usuario = sessionStorage.getItem('usuario');
@@ -200,6 +375,9 @@
                     </div>
                 </div>
                 
+                <button class="boton_formulario" onclick="window.location.href='editar_perfil.html'" style="background-color: #404040;">EDITAR PERFIL</button>
+                <button class="boton_formulario boton_pedidos" onclick="window.location.href='pedidos.html'">MIS PEDIDOS</button>
+                <button class="boton_formulario boton_agregar_producto" onclick="toggle_formulario_agregar()">AGREGAR PRODUCTO</button>
                 <button class="boton_formulario" onclick="cerrar_sesion()" style="background-color: #ff4444;">CERRAR SESIÓN</button>
             `;
         }
@@ -210,8 +388,27 @@
             window.location.href = 'inicio.html';
         }
 
+        function actualizar_enlace_sesion()
+        {
+            const usuario = sessionStorage.getItem('usuario');
+
+            if (usuario)
+            {
+                const enlace_sesion = document.getElementById('enlace_sesion');
+                enlace_sesion.textContent = 'MI PERFIL';
+                enlace_sesion.href = 'perfil.html';
+            }
+            else
+            {
+                const enlace_sesion = document.getElementById('enlace_sesion');
+                enlace_sesion.textContent = 'INICIAR SESIÓN';
+                enlace_sesion.href = 'inicio_sesion.html';
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () =>
         {
+            actualizar_enlace_sesion();
             mostrar_perfil();
             actualizar_contador_carrito();
         });

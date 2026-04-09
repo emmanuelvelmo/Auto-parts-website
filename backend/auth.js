@@ -71,6 +71,7 @@ function iniciar_sesion(correo_usuario, contrasena_usuario)
 }
 
 module.exports = {
+    hashear_contrasena,
     registrar_usuario,
     iniciar_sesion
 };

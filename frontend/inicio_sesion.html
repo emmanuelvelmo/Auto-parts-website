@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- BARRA DE NAVEGACIÓN -->
     <header class="header_navegacion">
         <div class="contenedor_logo">
             <span class="logo_texto">AUTOPARTS STORE</span>
@@ -19,7 +18,8 @@
                 <li class="item_menu"><a href="catalogo.html" class="enlace_menu">CATÁLOGO</a></li>
                 <li class="item_menu"><a href="ofertas.html" class="enlace_menu">OFERTAS</a></li>
                 <li class="item_menu"><a href="contacto.html" class="enlace_menu">CONTACTO</a></li>
-                <li class="item_menu"><a href="inicio_sesion.html" class="enlace_menu activo" id="enlace_sesion">INICIAR SESIÓN</a></li>
+                <li class="item_menu"><a href="pedidos.html" class="enlace_menu">MIS PEDIDOS</a></li>
+                <li class="item_menu"><a href="perfil.html" class="enlace_menu activo" id="enlace_sesion">INICIAR SESIÓN</a></li>
             </ul>
         </nav>
 
@@ -34,7 +34,6 @@
         </div>
     </header>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <div class="contenedor_formulario">
         <h1 class="titulo_formulario">INICIAR SESIÓN</h1>
         
@@ -59,7 +58,6 @@
         </form>
     </div>
 
-    <!-- PIE DE PÁGINA -->
     <footer class="footer_pagina">
         <div class="contenedor_footer">
             <div class="columna_footer">
@@ -142,6 +140,7 @@
         document.getElementById('formulario_inicio_sesion').addEventListener('submit', manejar_envio_formulario);
 
         const url_params = new URLSearchParams(window.location.search);
+        
         if (url_params.get('registro') === 'exitoso')
         {
             const mensaje_exito = document.createElement('div');
